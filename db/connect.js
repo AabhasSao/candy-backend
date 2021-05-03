@@ -18,5 +18,6 @@ const auth = () => {
 }
 
 module.exports = {
-    auth
+    auth,
+    sequelize
 }

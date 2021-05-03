@@ -1,5 +1,9 @@
 # idea
 .idea
+
+#secret keys
+aws/config.json
+
 # Logs
 logs
 *.log
