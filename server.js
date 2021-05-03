@@ -4,11 +4,13 @@ const PORT = process.env.port || 1337;
 const {User} = require('./db/schemas/user');
 const {Post} = require('./db/schemas/post')
 const {auth} = require('./db/connect')
+const {indexRouter} = require('./routes/index')
+const {postsRouter} = require('./routes/postsRouter');
 
-app.get('/', (req, res) => {
-    res.send('hello')
-})
 
+// routing
+app.use('/', indexRouter);
+app.use('/post', postsRouter);
 // db
 auth();
 User.sync().then((result) => {
