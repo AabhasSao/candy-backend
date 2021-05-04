@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-const PORT = process.env.port || 1337;
+const PORT = process.env.port || 3000;
 const { User } = require('./db/schemas/user');
 const { Post } = require('./db/schemas/post');
 const { auth } = require('./db/connect');
@@ -15,13 +15,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/post', postsRouter);
 // db
-auth();
-User.sync().then((result) => {
-  console.log(result);
-});
-Post.sync().then((result) => {
-  console.log(result);
-});
+(async () => {
+  await auth();
+  await User.sync(
+  ).then((result) => {
+    console.log(result);
+  });
+  await Post.sync({ force: true }).then((result) => {
+    console.log(result);
+  });
+})();
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

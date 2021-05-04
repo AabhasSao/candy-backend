@@ -1,13 +1,11 @@
 const postsRouter = require('express').Router();
+const { createPost } = require('../controllers/postsController');
 
 postsRouter.get('/', (req, res) => {
   res.send('post');
 });
 
-postsRouter.post('/', (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
+postsRouter.post('/', createPost);
 
 module.exports = {
   postsRouter,
