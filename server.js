@@ -8,6 +8,9 @@ const { auth } = require('./db/connect');
 const { indexRouter } = require('./routes/index');
 const { postsRouter } = require('./routes/postsRouter');
 
+// middlewares
+app.use(express.urlencoded({ extended: true }));
+
 // routing
 app.use('/', indexRouter);
 app.use('/post', postsRouter);

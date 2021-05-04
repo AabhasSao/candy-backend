@@ -1,8 +1,8 @@
 const { nanoid } = require('nanoid');
-const { User } = require('../schemas/user');
-const { sequelize } = require('../connect');
+const { User } = require('../db/schemas/user');
+const { sequelize } = require('../db/connect');
 
-async function createUser(username) {
+export async function createUser(username) {
   try {
     const res = await User.create({
       userId: nanoid(),
