@@ -15,17 +15,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/post', postsRouter);
 // db
-(async () => {
-  await auth();
-  await User.sync(
-  ).then((result) => {
-    console.log(result);
-  });
-  await Post.sync({ force: true }).then((result) => {
-    console.log(result);
-  });
+(async() => {
+    await auth();
+    await User.sync().then((result) => {
+        console.log(result);
+    });
+    await Post.sync({ force: true }).then((result) => {
+        console.log(result);
+    });
 })();
 
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+    console.log(`listening on port ${PORT}`);
 });
