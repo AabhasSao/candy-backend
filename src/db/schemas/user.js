@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../connect');
 const { Post } = require('./post');
@@ -8,8 +9,13 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
   },
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+  },
   userId: {
-    type: DataTypes.STRING(),
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
     primaryKey: true,
@@ -17,11 +23,19 @@ const User = sequelize.define('User', {
   lastLogin: {
     type: DataTypes.DATE,
   },
+  googleId: {
+    type: DataTypes.STRING,
+  },
+  hash: {
+    type: DataTypes.STRING(500),
+  },
 }, {
   timestamps: true,
   createdAt: true,
   updatedAt: false,
 });
+
+User.prototype.validPassword = (password) => bcrypt.compareSync(password, this.hash);
 
 User.hasMany(Post, {
   foreignKey: {
@@ -29,10 +43,9 @@ User.hasMany(Post, {
     allowNull: false,
   },
 });
+
 Post.belongsTo(User, {
   foreignKey: 'userId',
 });
 
-module.exports = {
-  User,
-};
+module.exports = User;
