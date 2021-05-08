@@ -4,10 +4,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const bcrypt = require('bcrypt');
 const { sequelize } = require('./db/connect');
 const User = require('./db/schemas/user');
-const { Post } = require('./db/schemas/post');
 const { auth } = require('./db/connect');
 const { indexRouter } = require('./routes/index');
 const { postsRouter } = require('./routes/postsRouter');
@@ -31,6 +29,14 @@ app.use(require('flash')());
 
 let userProfile;
 
+const secured = (req, res, next) => {
+  if (req.user) {
+    console.log(req.user);
+    return next();
+  }
+  res.redirect('/auth/login');
+};
+
 app.use(passport.initialize());
 app.use(passport.session());
 // routing
@@ -38,6 +44,9 @@ app.use(passport.session());
 // app.use('/post', postsRouter);
 app.use('/auth', authRouter);
 
+app.get('/users', secured, (req, res) => {
+  res.send('users');
+});
 app.get('/success', (req, res) => res.send(userProfile));
 app.get('/error', (req, res) => res.send('error logging in'));
 
@@ -73,25 +82,31 @@ passport.use('local-signup', new LocalStrategy(
           return done(null, false, 'That email is already taken');
         }
         const res = createUser(email, username, password);
-        console.log(res);
-        return res;
+        res.then((newUser, created) => {
+          if (!newUser) {
+            return done(null, false);
+          }
+
+          return done(null, newUser);
+        });
       });
     });
   },
 ));
 
-passport.use(new LocalStrategy({
+passport.use('local', new LocalStrategy({
   usernameField: 'email',
 },
 (email, password, done) => {
-  User.findOne({ email }, (err, user) => {
-    if (err) { return done(err); }
+  User.findOne({ where: { email } }).then((user) => {
     if (!user) {
-      return done(null, false, { message: 'Incorrect username.' });
+      console.log(user);
+      return done(null, false);
     }
-    if (!user.validPassword(password)) {
-      return done(null, false, { message: 'Incorrect password.' });
+    if (!user.validPassword) {
+      return done(null, false);
     }
+    console.log('user logged in');
     return done(null, user);
   });
 }));
@@ -122,7 +137,7 @@ passport.use(new GoogleStrategy({
 // db
 (async () => {
   await auth();
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
   console.log('All models were synchronized successfully.');
 })();
 

@@ -4,12 +4,12 @@ const passport = require('passport');
 const path = require('path');
 
 authRouter.get('/login', (req, res) => {
-  res.sendFile(path.resolve(`${__dirname}/../public/register.html);
-})
+  res.sendFile(path.resolve(`${__dirname}/../public/login.html`));
+});
 
 authRouter.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/auth/login',
   failureFlash: true,
 }));
 
