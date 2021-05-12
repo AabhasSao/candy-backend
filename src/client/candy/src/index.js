@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import NavigationBar from './components/navigation.component';
 
 ReactDOM.render(
-  <NavigationBar />,
+  <App />,
   document.getElementById('root')
 );
 
