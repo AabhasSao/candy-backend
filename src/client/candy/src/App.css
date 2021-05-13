@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
+  height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -22,5 +23,20 @@
 
 .App-link {
   color: #61dafb;
+}
+
+input {
+  height: 2em;
+  margin-bottom: 2em;
+}
+
+label {
+  color: white;
+  display: block;
+}
+
+button {
+  border: none;
+  height: 2em;
 }
 
