@@ -11,7 +11,6 @@ function App() {
     axios.get('http://localhost:3000/users', { withCredentials: true })
       .then(
         (res) => {
-          console.log(res);
           if (res.data) {
             setIsAuthenticated(true);
           }
