@@ -1,9 +1,11 @@
-const indexRouter = require('express').Router();
+const router = require('express').Router();
 
-indexRouter.get('/', (req, res) => {
-  res.send('hello');
+router.get('/', (req, res) => {
+  res.send(req.user);
 });
 
-module.exports = {
-  indexRouter,
-};
+router.get('/users', (req, res) => {
+  res.send(req.user);
+});
+
+module.exports = router;

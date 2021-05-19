@@ -1,19 +1,33 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Feed from './components/feed.component';
-import SignUp from './components/signup.component';
+import Authentication from './components/authentication.component';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/users', { withCredentials: true })
+      .then(
+        (res) => {
+          console.log(res);
+          if (res.data) {
+            setIsAuthenticated(true);
+          }
+        },
+      );
+  }, [isAuthenticated]);
+
   if (isAuthenticated) {
     return (<div className='App'>
-      <Feed />
+      <Feed/>
       <button onClick={() => setIsAuthenticated(!isAuthenticated)}>Change authenticity</button>
     </div>);
   }
   return (
     <div className="App">
-      <SignUp />
+      <Authentication setIsAuthenticated={setIsAuthenticated}/>
     </div>
   );
 }

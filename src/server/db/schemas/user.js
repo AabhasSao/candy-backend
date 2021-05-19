@@ -35,7 +35,7 @@ const User = sequelize.define('User', {
   updatedAt: false,
 });
 
-User.prototype.validPassword = (password) => bcrypt.compareSync(password, this.hash);
+User.prototype.validPassword = (user, password) => bcrypt.compareSync(password, user.hash);
 
 User.hasMany(Post, {
   foreignKey: {
