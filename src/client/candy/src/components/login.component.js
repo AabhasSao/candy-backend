@@ -18,7 +18,7 @@ const Login = ({ setIsAuthenticated }) => {
       console.log(res);
       setIsAuthenticated(true);
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
     });
   };
 

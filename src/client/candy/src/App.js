@@ -21,7 +21,6 @@ function App() {
   if (isAuthenticated) {
     return (<div className='App'>
       <Feed/>
-      <button onClick={() => setIsAuthenticated(!isAuthenticated)}>Change authenticity</button>
     </div>);
   }
   return (
