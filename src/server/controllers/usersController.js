@@ -30,7 +30,6 @@ const userProfileProvider = async (req, res, next) => {
   //   return res.status(401);
   // }
   const { id } = req.params;
-  console.log(chalk.blue(id));
   await User.findOne({
     where: {
       username: id,
@@ -40,7 +39,39 @@ const userProfileProvider = async (req, res, next) => {
     .catch((e) => { res.json(e); });
 };
 
+const valiteFollow = async (req, res, next) => {
+  const { id } = req.params;
+  await User.findByPk('1').then((user) => {
+    user.getFollowers({
+      where: {
+        username: id,
+      },
+    }).then((follower) => res.send(follower))
+      .catch((e) => e);
+  });
+};
+
+const userAllFollowers = async (req, res, next) => {
+  await User.findByPk('1')
+    .then((user) => {
+      user.getFollowers().then((followers) => {
+        res.send(followers).catch((e) => e);
+      }).catch((e) => e);
+    });
+};
+
+const userAllFollowings = async (req, res, next) => {
+  await User.findByPk('1').then((user) => {
+    user.getFollowings().then((followings) => {
+      res.send(followings).catch((e) => e);
+    }).catch((e) => e);
+  });
+};
+
 module.exports = {
   createUser,
   userProfileProvider,
+  valiteFollow,
+  userAllFollowers,
+  userAllFollowings,
 };

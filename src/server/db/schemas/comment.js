@@ -8,4 +8,8 @@ const Comment = sequelize.define('Comment', {
 
 });
 
+Comment.hasMany(Comment, {
+  foreignKey: 'commentId',
+});
+
 module.exports = Comment;

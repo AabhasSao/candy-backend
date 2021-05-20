@@ -71,13 +71,14 @@ Comment.belongsTo(User, {
   foreignKey: 'userId',
 });
 
-User.hasMany(User, {
-  as: 'Followers',
+User.belongsToMany(User, {
+  as: 'followers',
   foreignKey: 'followingId',
+  through: 'UserRelations',
 });
 
 User.belongsToMany(User, {
-  as: 'Followings',
+  as: 'followings',
   foreignKey: 'followerId',
   through: 'UserRelations',
 });
