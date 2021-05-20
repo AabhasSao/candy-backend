@@ -7,6 +7,7 @@ const { sequelize } = require('./db/connect');
 // const { auth } = require('./db/connect');
 const authRouter = require('./routes/authRouter');
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/userRouter');
 
 const app = express();
 const PORT = process.env.port || 3000;
@@ -34,14 +35,41 @@ app.use(passport.session());
 app.use('/', indexRouter);
 // app.use('/post', postsRouter);
 app.use('/auth', authRouter);
-// app.use('/user', userRouter);
+app.use('/user', userRouter);
 // app.get('/success', (req, res) => res.send(userProfile));
 // app.get('/error', (req, res) => res.send('error logging in'));
 
 // db
 (async () => {
-  // await auth();
-  await sequelize.sync();
+  await sequelize.sync({ force: true });
+
+  await User.bulkCreate([
+    { id: '1', email: 'a@gmail.com', username: 'Arietta' },
+    { id: '2', email: 'b@gmail.com', username: 'Brandi' },
+    { id: '3', email: 'c@gmail.com', username: 'Chloe' },
+    { id: '4', email: 'd@gmail.com', username: 'Dani' },
+    { id: '5', email: 'l@gmail.com', username: 'Lana' },
+    { id: '6', email: 'g@gmail.com', username: 'Gabbie' },
+    { id: '7', email: 's@gmail.com', username: 'Skylar' },
+  ]);
+
+  const arietta = await User.findByPk('1');
+  const gabbie = await User.findByPk('6');
+  const lana = await User.findByPk('5');
+  const chloe = await User.findByPk('3');
+  const dani = await User.findByPk('4');
+
+  await dani.addFollowings([gabbie, lana]);
+
+  await arietta.addFollowers([gabbie, lana, chloe]);
+
+  await arietta.getFollowers().then((res) => {
+    console.log(chalk.green(JSON.stringify(res)));
+  });
+
+  await dani.getFollowings().then((res) => {
+    console.log(chalk.green(JSON.stringify(res)));
+  });
 })();
 
 app.listen(PORT, () => {

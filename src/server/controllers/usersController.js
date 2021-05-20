@@ -25,6 +25,22 @@ async function createUser(email, username, password) {
   }
 }
 
+const userProfileProvider = async (req, res, next) => {
+  // if (!req.isAuthenticated()) {
+  //   return res.status(401);
+  // }
+  const { id } = req.params;
+  console.log(chalk.blue(id));
+  await User.findOne({
+    where: {
+      username: id,
+    },
+  })
+    .then((user) => { res.json(user); })
+    .catch((e) => { res.json(e); });
+};
+
 module.exports = {
   createUser,
+  userProfileProvider,
 };

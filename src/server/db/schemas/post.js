@@ -1,7 +1,11 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../connect');
+const Comment = require('./comment');
 
 const Post = sequelize.define('Post', {
+  postId: {
+    type: DataTypes.STRING,
+  },
   imageUrl: {
     type: DataTypes.STRING(800),
     allowNull: false,
@@ -13,6 +17,8 @@ const Post = sequelize.define('Post', {
   updatedAt: false,
 });
 
-module.exports = {
-  Post,
-};
+Post.hasMany(Comment);
+
+Comment.belongsTo(Post);
+
+module.exports = Post;

@@ -1,13 +1,12 @@
-const userRouter = require('express').Router();
-const passport = require('passport');
-const path = require('path');
+const router = require('express').Router();
 const chalk = require('chalk');
+const { userProfileProvider } = require('../controllers/usersController');
 
-userRouter.get('/', (req, res) => {
+router.get('/', (req, res) => {
   console.log(chalk.red(req.user));
   res.send(req.user);
 });
 
-module.exports = {
-  userRouter,
-};
+router.get('/:id', userProfileProvider);
+
+module.exports = router;
