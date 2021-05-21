@@ -1,8 +1,6 @@
 const router = require('express').Router();
-const chalk = require('chalk');
 const {
   userProfileProvider,
-  valiteFollow,
   userAllFollowers,
   userAllFollowings,
   followOtherUser,
@@ -10,7 +8,7 @@ const {
 } = require('../controllers/usersController');
 
 router.get('/', (req, res) => {
-  console.log(chalk.red(req.user));
+  // console.log(chalk.red(req.user));
   res.send(req.user);
 });
 

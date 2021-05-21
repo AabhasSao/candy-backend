@@ -1,6 +1,5 @@
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
-const chalk = require('chalk');
 const User = require('../db/schemas/user');
 const { sequelize } = require('../db/connect');
 
@@ -17,15 +16,13 @@ async function createUser(email, username, password) {
       lastLogin: sequelize.fn('NOW'),
       hash,
     });
-    console.log(res);
     return res;
   } catch (e) {
-    console.log(chalk.red(e));
     return e;
   }
 }
 
-const userProfileProvider = async (req, res, next) => {
+const userProfileProvider = async (req, res) => {
   // if (!req.isAuthenticated()) {
   //   return res.status(401);
   // }
@@ -51,7 +48,7 @@ const userProfileProvider = async (req, res, next) => {
 //   });
 // };
 
-const userAllFollowers = async (req, res, next) => {
+const userAllFollowers = async (req, res) => {
   await User.findByPk('1')
     .then((user) => {
       user.getFollowers().then((followers) => {
@@ -60,7 +57,7 @@ const userAllFollowers = async (req, res, next) => {
     });
 };
 
-const userAllFollowings = async (req, res, next) => {
+const userAllFollowings = async (req, res) => {
   await User.findByPk('1').then((user) => {
     user.getFollowings().then((followings) => {
       res.send(followings).catch((e) => e);
@@ -93,10 +90,11 @@ const followOtherUser = async (req, res, next) => {
     const me = await User.findByPk('1');
     const otherUser = await User.findOne({ where: { username: id } });
     otherUser.addFollower(me);
+
     return res.send(`you followed ${otherUser.username}`);
   } catch (e) {
-    res.send('some error, cannot follow');
     next(e);
+    return res.send('some error, cannot follow');
   }
 };
 
@@ -114,8 +112,8 @@ const unfollowOtherUser = async (req, res, next) => {
     otherUser.removeFollower(me);
     return res.send(`you unfollowed ${otherUser.username}`);
   } catch (e) {
-    res.send('some error, cannot unfollow');
     next(e);
+    return res.send('some error, cannot unfollow');
   }
 };
 

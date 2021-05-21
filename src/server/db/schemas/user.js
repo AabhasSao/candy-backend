@@ -31,6 +31,9 @@ const User = sequelize.define('User', {
       isNumeric: { msg: 'Must be a number' },
     },
   },
+  imageUrl: {
+    type: DataTypes.STRING,
+  },
   lastLogin: {
     type: DataTypes.DATE,
   },
