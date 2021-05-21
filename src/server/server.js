@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
-const chalk = require('chalk');
+const morgan = require('morgan');
 const { sequelize } = require('./db/connect');
 // const { auth } = require('./db/connect');
 const authRouter = require('./routes/authRouter');
@@ -20,6 +20,7 @@ require('./passportConfig')(passport);
 // middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(morgan('dev'));
 app.use(cors({ credentials: true, origin: 'http://localhost:1337' }));
 app.use(session({
   resave: false,
