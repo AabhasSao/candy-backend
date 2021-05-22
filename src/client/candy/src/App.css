@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+  background-color: blue;
+  min-height: 100vh;
+  width: auto;
+}
+
+input {
+  height: 2em;
+  margin-bottom: 2em;
+}
+
+label {
+  color: white;
+  display: block;
+}
+
+button {
+  border: none;
+  height: 2em;
+}
+
