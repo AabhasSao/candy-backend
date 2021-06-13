@@ -5,7 +5,7 @@ const {
   userAllFollowings,
   followOtherUser,
   unfollowOtherUser,
-} = require('../controllers/usersController');
+} = require('./usersController');
 
 router.get('/', (req, res) => {
   // console.log(chalk.red(req.user));

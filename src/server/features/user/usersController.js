@@ -1,7 +1,7 @@
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
-const User = require('../db/schemas/user');
-const { sequelize } = require('../db/connect');
+const User = require('../../db/schemas/user');
+const { sequelize } = require('../../db/connect');
 
 const saltRounds = 14;
 

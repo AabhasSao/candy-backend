@@ -4,9 +4,9 @@
   "description": "candy backend",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server/server.js",
+    "start": "node src/server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server/server.js"
+    "dev": "nodemon src/server/app.js"
   },
   "repository": {
     "type": "git",

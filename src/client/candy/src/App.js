@@ -38,7 +38,7 @@ function App() {
     <Route path ='/auth'>
       <Authentication setIsAuthenticated={setIsAuthenticated} />
     </Route>
-    <Route path='home'>
+    <Route path='/'>
       <Feed />
     </Route>
   </Switch>);

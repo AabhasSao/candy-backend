@@ -1,4 +1,4 @@
-const { Post } = require('../db/schemas/post');
+const { Post } = require('../../db/schemas/post');
 
 async function createPost(req, res) {
   const { userId } = req.body;
