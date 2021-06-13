@@ -6,9 +6,9 @@ const session = require('express-session');
 const morgan = require('morgan');
 const { sequelize } = require('./db/connect');
 // const { auth } = require('./db/connect');
-const authRouter = require('./routes/authRouter');
-const indexRouter = require('./routes/index');
-const userRouter = require('./routes/userRouter');
+const authRouter = require('./features/routes/authRouter');
+const indexRouter = require('./features/routes/index');
+const userRouter = require('./features/user/userRouter');
 const initDB = require('./db/init');
 const User = require('./db/schemas/user');
 

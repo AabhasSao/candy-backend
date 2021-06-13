@@ -3,8 +3,8 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize({
   host: 'localhost',
   database: 'candy',
-  username: 'kirito',
-  password: '123',
+  username: 'asuna',
+  password: 'NogameNolife236',
   dialect: 'mysql',
 });
 
@@ -16,6 +16,8 @@ const auth = () => {
     console.error(e);
   }
 };
+
+auth();
 
 module.exports = {
   auth,
