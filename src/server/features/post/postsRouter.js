@@ -1,5 +1,5 @@
 const postRouter = require('express').Router();
-const { createPost } = require('../controllers/postsController');
+const { createPost } = require('./postsController');
 
 postRouter.get('/', (req, res) => {
   res.send('post');

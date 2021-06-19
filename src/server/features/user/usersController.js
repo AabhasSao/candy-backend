@@ -117,11 +117,26 @@ const unfollowOtherUser = async (req, res, next) => {
   }
 };
 
+async function userAllPosts(Post) {
+  const userId = 1;
+  try {
+    const posts = Post.find({
+      where: {
+        userId,
+      },
+    });
+    return posts;
+  } catch (e) {
+    return [];
+  }
+}
+
 module.exports = {
   createUser,
   userProfileProvider,
   userAllFollowers,
   userAllFollowings,
+  userAllPosts,
   followOtherUser,
   unfollowOtherUser,
   validateFollow,
