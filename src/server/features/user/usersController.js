@@ -5,6 +5,7 @@ const { sequelize } = require('../../db/connect');
 
 const saltRounds = 14;
 
+// sign up
 async function createUser(email, username, password) {
   try {
     const hash = await bcrypt.hashSync(password, saltRounds);
@@ -22,6 +23,7 @@ async function createUser(email, username, password) {
   }
 }
 
+// request details about a user
 const userProfileProvider = async (req, res) => {
   // if (!req.isAuthenticated()) {
   //   return res.status(401);
@@ -48,6 +50,7 @@ const userProfileProvider = async (req, res) => {
 //   });
 // };
 
+// List all followers of a user
 const userAllFollowers = async (req, res) => {
   await User.findByPk('1')
     .then((user) => {
@@ -57,6 +60,7 @@ const userAllFollowers = async (req, res) => {
     });
 };
 
+// List of all people user is following
 const userAllFollowings = async (req, res) => {
   await User.findByPk('1').then((user) => {
     user.getFollowings().then((followings) => {
@@ -65,6 +69,7 @@ const userAllFollowings = async (req, res) => {
   });
 };
 
+// Check if already following or not if already a follower returns false
 const validateFollow = async (id) => {
   try {
     const follower = await User.findByPk('1');
@@ -78,6 +83,7 @@ const validateFollow = async (id) => {
   }
 };
 
+// follow a user
 const followOtherUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -98,6 +104,7 @@ const followOtherUser = async (req, res, next) => {
   }
 };
 
+// unfollow another user
 const unfollowOtherUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -117,6 +124,7 @@ const unfollowOtherUser = async (req, res, next) => {
   }
 };
 
+// Get all posts of user
 async function userAllPosts(Post) {
   const userId = 1;
   try {
