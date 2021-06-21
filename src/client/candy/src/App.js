@@ -1,14 +1,13 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 // import axios from 'axios';
-// import { Switch, Route } from 'react-router-dom';
-// import Feed from './components/feed.component';
-import Authentication from './components/authentication.component';
-// import Profile from './components/profile.component';
-import Home from './pages/index';
+import { Switch, Route } from 'react-router-dom';
+import Profile from './pages/profile.jsx';
+import Home from './pages/home.jsx';
+import NavigationBar from './components/navigation.component';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   // useEffect(() => {
   //   axios.get('http://localhost:3000/users', { withCredentials: true })
@@ -21,26 +20,30 @@ function App() {
   //     );
   // }, [isAuthenticated]);
 
-  if (isAuthenticated) {
-    return <Home />;
-  }
-  return (
-    <div className="App">
-      <Authentication setIsAuthenticated={setIsAuthenticated}/>
-    </div>
-  );
+  // if (isAuthenticated) {
+  //   return <Home />;
+  // }
+  // return (
+  //   <div className="App">
+  //     <Authentication setIsAuthenticated={setIsAuthenticated}/>
+  //   </div>
+  // );
   // console.log(isAuthenticated);
-  // return (<Switch>
-  //   <Route path='/user'>
-  //     <Profile />
-  //   </Route>
-  //   <Route path ='/auth'>
-  //     <Authentication setIsAuthenticated={setIsAuthenticated} />
-  //   </Route>
-  //   <Route path='/'>
-  //     <Feed />
-  //   </Route>
-  // </Switch>);
+  return (
+  <>
+    <Switch>
+      <Route path='/user'>
+        <Profile />
+      </Route>
+      {/* <Route path ='/auth'>
+        <Authentication setIsAuthenticated={setIsAuthenticated} />
+      </Route> */}
+      <Route path='/'>
+        <Home />
+      </Route>
+    </Switch>
+    <NavigationBar />
+  </>);
 }
 
 export default App;
