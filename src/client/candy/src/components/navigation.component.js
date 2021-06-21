@@ -1,7 +1,8 @@
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
-  Restore, Favorite, LocationOn, Folder,
+  Home, Favorite, LocationOn, AccountCircle,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,16 +21,27 @@ export default function NavigationBar() {
 
   return (
     <BottomNavigation value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.fixed}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      className={classes.fixed}
     >
-        <BottomNavigationAction label="Recents" value="recents" icon={<Restore />} />
+        <BottomNavigationAction
+          component={Link}
+          to='/'
+          label="Home"
+          value="home"
+          icon={<Home />}
+        />
         <BottomNavigationAction label="Favorites" value="favorites" icon={<Favorite />} />
         <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOn />} />
-        <BottomNavigationAction label="Folder" value="folder" icon={<Folder />} />
+        <BottomNavigationAction
+          component={Link} to='/user'
+          label="Profile"
+          value="profile"
+          icon={<AccountCircle />}
+        />
     </BottomNavigation>
   );
 }

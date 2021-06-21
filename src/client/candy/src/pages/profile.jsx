@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
   Paper, makeStyles, Button, GridListTile, GridList, CardMedia,
 } from '@material-ui/core';
-import CircularProfile from './circularProfile.component';
+import CircularProfile from '../components/circularProfile.component';
 
 const useStyles = makeStyles({
   root: {

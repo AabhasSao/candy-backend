@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Post from './post.component';
-import NavigationBar from './navigation.component';
 
 const Feed = () => (<>
         <Grid
@@ -22,7 +21,6 @@ const Feed = () => (<>
                 <Post />
             </Grid>
         </Grid>
-        <NavigationBar />
     </>);
 
 export default Feed;
