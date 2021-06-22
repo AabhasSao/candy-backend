@@ -6,18 +6,14 @@ import {
 import tileData from '../dummy_data/posts.json';
 import CircularProfile from '../components/circularProfile.component';
 import '../assets/css/gallery.css';
+import UserInfo from '../components/userInfo.jsx';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: '70vw',
-    minHeight: '400px',
     margin: 'auto',
     marginTop: '2em',
     padding: '2em',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
   },
   // eslint-disable-next-line quote-props
   inputControl: {
@@ -34,20 +30,12 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     marginTop: '1em',
-  },
-  bio_text: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  small: {
-    width: '100px',
-    height: '100px',
-  },
 
-  user_posts: {
-    marginTop: '4em',
+    '& .MuiAvatar-root': {
+      marginRight: '2em',
+    },
   },
 });
 
@@ -85,7 +73,7 @@ const Profile = () => {
     );
   }
   return (
-        <Paper >
+        <Paper className={classes.root} >
             <div className={classes.inputControl}>
                 <input name='id' onChange={(e) => setId(e.target.value)} />
                 <Button
@@ -96,12 +84,8 @@ const Profile = () => {
                   </Button>
             </div>
             <div className={classes.bio}>
-
                 <CircularProfile avatarLink={profile.imageUrl} avatarAlt={profile.username} />
-                <div className={classes.bio_text}>
-                    <p>{profile.username}</p>
-                    <p>{profile.email}</p>
-                </div>
+                <UserInfo />
             </div>
             <div id="gallery">
               {gallery}
