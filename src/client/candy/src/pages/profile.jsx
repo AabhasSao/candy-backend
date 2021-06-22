@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Paper, makeStyles, Button, GridListTile, GridList, CardMedia,
+  Paper, makeStyles, Button,
 } from '@material-ui/core';
+import tileData from '../dummy_data/posts.json';
 import CircularProfile from '../components/circularProfile.component';
+import '../assets/css/gallery.css';
 
 const useStyles = makeStyles({
   root: {
@@ -12,6 +14,10 @@ const useStyles = makeStyles({
     margin: 'auto',
     marginTop: '2em',
     padding: '2em',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
   },
   // eslint-disable-next-line quote-props
   inputControl: {
@@ -54,26 +60,40 @@ const Profile = () => {
       setProfile(res.data);
     });
   };
-  const tileData = [{
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Discovery_%28Apple%29.jpg/330px-Discovery_%28Apple%29.jpg',
-    title: 'star',
-    cols: 1,
-  }, {
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Discovery_%28Apple%29.jpg/330px-Discovery_%28Apple%29.jpg',
-    title: 'star',
-    cols: 1,
-  }, {
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Discovery_%28Apple%29.jpg/330px-Discovery_%28Apple%29.jpg',
-    title: 'star',
-    cols: 1,
-  }];
-  const classes = useStyles();
 
+  const classes = useStyles();
+  const gallery = [];
+
+  for (let i = 0; i < tileData.length; i += 3) {
+    const rowItems = [];
+    for (let j = i; j < i + 3; j += 1) {
+      if (j >= tileData.length) {
+        break;
+      }
+      rowItems.push(
+      <div className="gallery-item">
+        <div className={'post-container'}>
+          <img src={tileData[j].download_url} key={tileData[j].id} />
+        </div>
+      </div>,
+      );
+    }
+    gallery.push(
+      <div className='gallery-row' key={i}>
+      {rowItems}
+    </div>,
+    );
+  }
   return (
-        <Paper className={classes.root} >
+        <Paper >
             <div className={classes.inputControl}>
                 <input name='id' onChange={(e) => setId(e.target.value)} />
-                <Button variant='contained' onClick={handleGetUser} color='secondary' >Find User</Button>
+                <Button
+                  variant='contained'
+                  onClick={handleGetUser}
+                  color='secondary' >
+                    Find User
+                  </Button>
             </div>
             <div className={classes.bio}>
 
@@ -83,15 +103,9 @@ const Profile = () => {
                     <p>{profile.email}</p>
                 </div>
             </div>
-            <GridList cols={3}>
-                {tileData.map((tile) => (
-                <GridListTile key={tile.img} cols={tile.cols || 1}>
-                    <CardMedia>
-                        <img src={tile.img} alt={tile.title} />
-                    </CardMedia>
-                </GridListTile>
-                ))}
-            </GridList>
+            <div id="gallery">
+              {gallery}
+            </div>
         </Paper>
   );
 };
