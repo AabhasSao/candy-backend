@@ -2,9 +2,17 @@ import './App.css';
 import React from 'react';
 // import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { orange } from '@material-ui/core/colors';
 import Profile from './pages/profile.jsx';
 import Home from './pages/home.jsx';
 import NavigationBar from './components/navigation.component';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: orange,
+  },
+});
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -30,7 +38,7 @@ function App() {
   // );
   // console.log(isAuthenticated);
   return (
-  <>
+  <ThemeProvider theme={theme} >
     <Switch>
       <Route path='/user'>
         <Profile />
@@ -43,7 +51,7 @@ function App() {
       </Route>
     </Switch>
     <NavigationBar />
-  </>);
+  </ThemeProvider>);
 }
 
 export default App;

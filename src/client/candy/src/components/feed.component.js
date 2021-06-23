@@ -1,9 +1,10 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Post from './post.component';
+// import Grid from '@material-ui/core/Grid';
+import Post from './post.jsx';
 
 const Feed = () => (<>
-        <Grid
+        <Post />
+        {/* <Grid
             container
             spacing={0}
             direction="row"
@@ -20,7 +21,7 @@ const Feed = () => (<>
             <Grid item lg={4} md={6} sm={12} xs={12} >
                 <Post />
             </Grid>
-        </Grid>
+        </Grid> */}
     </>);
 
 export default Feed;
