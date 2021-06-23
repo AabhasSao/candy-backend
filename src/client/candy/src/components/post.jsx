@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import blue from '@material-ui/core/colors/blue';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 // import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post() {
   const classes = useStyles();
+  const [like, setLike] = useState(false);
   return (
         <Card className={classes.root}>
           <CardHeader
@@ -44,8 +46,14 @@ export default function Post() {
             src='https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
           />
           <CardActions>
-            <IconButton>
-              <FavoriteBorderIcon />
+            <IconButton
+              color='primary'
+              onClick={ () => setLike(!like)}
+            >
+              {
+                like ? <FavoriteIcon /> : <FavoriteBorderIcon />
+              }
+
             </IconButton>
             <IconButton>
               <CommentOutlinedIcon />
