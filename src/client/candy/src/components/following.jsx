@@ -13,45 +13,42 @@ const useStyles = makeStyles({
   },
 });
 
+const data = [
+  {
+    id: '',
+    user_img: '',
+    user_handle: 'Britney Spear',
+  },
+  {
+    id: '',
+    user_img: '',
+    user_handle: 'Bruno Mars',
+  },
+];
+
 const Following = () => {
   const classes = useStyles();
   return (
         <List
             className={classes.root}
         >
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar
-                        color='secondary'
-                        alt='user image'
-                    >
-                        R
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText>Britney Spears</ListItemText>
-            </ListItem>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar
-                        color='secondary'
-                        alt='user image'
-                    >
-                        R
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText>Britney Spears</ListItemText>
-            </ListItem>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar
-                        color='secondary'
-                        alt='user image'
-                    >
-                        R
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText>Britney Spears</ListItemText>
-            </ListItem>
+            {
+                data.map((item) => (
+                        <ListItem
+                            key={item.user_handle}
+                        >
+                            <ListItemAvatar>
+                                <Avatar
+                                    color='secondary'
+                                    alt='user image'
+                                >
+                                    R
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText>{item.user_handle}</ListItemText>
+                        </ListItem>
+                ))
+            }
         </List>
   );
 };
