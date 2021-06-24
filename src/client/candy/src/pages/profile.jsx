@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core';
 import tileData from '../dummy_data/posts.json';
 import '../assets/css/gallery.css';
 import UserInfo from '../components/userInfo.jsx';
+import Following from '../components/following.jsx';
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +52,7 @@ const Profile = () => {
   }
   return (
        <Paper className={classes.root}>
+        <Following />
         <UserInfo />
         <div id='gallery'>
           {gallery}
