@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import {
-  Paper, makeStyles, Button,
-} from '@material-ui/core';
+import React from 'react';
+// import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
+// import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core';
 import tileData from '../dummy_data/posts.json';
-import CircularProfile from '../components/circularProfile.component';
 import '../assets/css/gallery.css';
 import UserInfo from '../components/userInfo.jsx';
 
@@ -15,39 +14,17 @@ const useStyles = makeStyles({
     marginTop: '2em',
     padding: '2em',
   },
-  // eslint-disable-next-line quote-props
-  inputControl: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-
-    '& input': {
-      display: 'block',
-      margin: '0 auto 1em auto',
-    },
-  },
-  bio: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '1em',
-
-    '& .MuiAvatar-root': {
-      marginRight: '2em',
-    },
-  },
 });
 
 const Profile = () => {
-  const [profile, setProfile] = useState({ username: 'dummy' });
-  const [id, setId] = useState('');
+  // const [profile, setProfile] = useState({ username: 'dummy' });
+  // const [id, setId] = useState('');
 
-  const handleGetUser = () => {
-    axios.get(`http://localhost:3000/user/${id}`).then((res) => {
-      setProfile(res.data);
-    });
-  };
+  // const handleGetUser = () => {
+  //   axios.get(`http://localhost:3000/user/${id}`).then((res) => {
+  //     setProfile(res.data);
+  //   });
+  // };
 
   const classes = useStyles();
   const gallery = [];
@@ -73,24 +50,12 @@ const Profile = () => {
     );
   }
   return (
-        <Paper className={classes.root} >
-            <div className={classes.inputControl}>
-                <input name='id' onChange={(e) => setId(e.target.value)} />
-                <Button
-                  variant='contained'
-                  onClick={handleGetUser}
-                  color='secondary' >
-                    Find User
-                  </Button>
-            </div>
-            <div className={classes.bio}>
-                <CircularProfile avatarLink={profile.imageUrl} avatarAlt={profile.username} />
-                <UserInfo />
-            </div>
-            <div id="gallery">
-              {gallery}
-            </div>
-        </Paper>
+       <Paper className={classes.root}>
+        <UserInfo />
+        <div id='gallery'>
+          {gallery}
+        </div>
+       </Paper>
   );
 };
 

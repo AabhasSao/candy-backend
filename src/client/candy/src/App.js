@@ -2,17 +2,19 @@ import './App.css';
 import React from 'react';
 // import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 import Profile from './pages/profile.jsx';
 import Home from './pages/home.jsx';
 import NavigationBar from './components/navigation.component';
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: orange,
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(true);
