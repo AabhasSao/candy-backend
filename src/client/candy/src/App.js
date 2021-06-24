@@ -6,7 +6,7 @@ import { ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui
 import { orange } from '@material-ui/core/colors';
 import Profile from './pages/profile.jsx';
 import Home from './pages/home.jsx';
-import NavigationBar from './components/navigation.component';
+import NavigationBar from './components/navigation.jsx';
 
 let theme = createMuiTheme({
   palette: {

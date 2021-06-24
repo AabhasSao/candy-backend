@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,15 +85,15 @@ const UserInfo = () => {
               </ListItem>
               <ListItem
                 button
-                component='a'
-                href='/'
+                component={Link}
+                to='/user/foo'
               >
                <ListItemText primary='236 followers' />
               </ListItem>
               <ListItem
                 button
-                component='a'
-                href='/'
+                component={Link}
+                to='/user/foo'
               >
                <ListItemText primary='23 followings' />
               </ListItem>

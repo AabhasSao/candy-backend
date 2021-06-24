@@ -1,6 +1,7 @@
 import React from 'react';
 // import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
+import { Route, useRouteMatch } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
 import tileData from '../dummy_data/posts.json';
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 const Profile = () => {
+  const { url } = useRouteMatch();
   // const [profile, setProfile] = useState({ username: 'dummy' });
   // const [id, setId] = useState('');
 
@@ -51,13 +53,15 @@ const Profile = () => {
     );
   }
   return (
-       <Paper className={classes.root}>
-        <Following />
-        <UserInfo />
-        <div id='gallery'>
-          {gallery}
-        </div>
-       </Paper>
+      <Paper className={classes.root}>
+        <Route exact={true} path={`${url}`}>
+          <UserInfo />
+          <div id='gallery'>
+            {gallery}
+          </div>
+        </Route>
+        <Route exact={true} path={`${url}/foo`} component={Following} />
+      </Paper>
   );
 };
 
