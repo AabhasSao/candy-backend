@@ -4,7 +4,7 @@
   "description": "candy backend",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server/app.js",
+    "start": "nodemon src/server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server/app.js"
   },

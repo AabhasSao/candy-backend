@@ -11,6 +11,7 @@ const indexRouter = require('./features/index');
 const userRouter = require('./features/user/userRouter');
 const initDB = require('./db/init');
 const User = require('./db/schemas/user');
+const Post = require('./db/schemas/post');
 
 const app = express();
 const PORT = process.env.port || 3000;
@@ -44,7 +45,7 @@ app.use('/user', userRouter);
 // app.get('/error', (req, res) => res.send('error logging in'));
 
 // db
-initDB(sequelize, User);
+initDB(sequelize, User, Post);
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

@@ -1,7 +1,11 @@
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
+const chalk = require('chalk');
 const User = require('../../db/schemas/user');
+const Post = require('../../db/schemas/post');
 const { sequelize } = require('../../db/connect');
+
+const getUserFeed = require('./utils/getUserFeed');
 
 const saltRounds = 14;
 
@@ -124,6 +128,14 @@ const unfollowOtherUser = async (req, res, next) => {
   }
 };
 
+// Prepare User feed and return
+
+async function UserFeed() {
+  const user = await User.findByPk('5');
+  const posts = await getUserFeed(user, Post);
+  return posts;
+}
+
 // Get all posts of user
 async function userAllPosts(Post) {
   const userId = 1;
@@ -148,4 +160,5 @@ module.exports = {
   followOtherUser,
   unfollowOtherUser,
   validateFollow,
+  UserFeed,
 };

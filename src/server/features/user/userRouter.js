@@ -7,11 +7,16 @@ const {
   followOtherUser,
   unfollowOtherUser,
   userAllPosts,
+  UserFeed,
 } = require('./usersController');
 
 router.get('/', (req, res) => {
   // console.log(chalk.red(req.user));
   res.send(req.user);
+});
+
+router.get('/feed', (req, res) => {
+  res.send(UserFeed());
 });
 
 router.get('/followers', userAllFollowers);
