@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import { Button, makeStyles } from '@material-ui/core';
@@ -7,44 +8,43 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
-const data = [
-  {
-    img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-    user_handle: 'Annee',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-    user_handle: 'Jamie',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-    user_handle: 'Anne',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-    user_handle: 'Annee',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-    user_handle: 'Jamie',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-    user_handle: 'Anne',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-    user_handle: 'Annee',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-    user_handle: 'Jamie',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-    user_handle: 'Anne',
-  },
-];
+// const data = [
+//   {
+//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+//     user_handle: 'Annee',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
+//     user_handle: 'Jamie',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+//     user_handle: 'Anne',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+//     user_handle: 'Annee',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
+//     user_handle: 'Jamie',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+//     user_handle: 'Anne',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+//     user_handle: 'Annee',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
+//     user_handle: 'Jamie',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+//     user_handle: 'Anne',
+//   },
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   avatar: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    width: theme.spacing(12),
+    height: theme.spacing(12),
     margin: 'auto',
   },
   user: {
@@ -74,7 +74,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SuggestToFollow = () => {
+  const [suggestions, setSuggestions] = useState([]);
   const classes = useStyles();
+
+  const handleFollow = async (id) => {
+    const follow = await axios.get(`http://localhost:3000/user/${id}/follow`);
+    console.log(follow);
+  };
+
+  useEffect(async () => {
+    const sgs = await axios.get('http://localhost:3000/user/suggestions');
+    setSuggestions(sgs.data);
+  }, []);
+  console.log('suggestoins', suggestions);
+
   return (
     <Box
         display='flex'
@@ -94,11 +107,11 @@ const SuggestToFollow = () => {
             flexDirection='row'
         >
             {
-                data.map((item) => (
-                    <Card className={classes.user} key={item.user_handle} >
+                suggestions.map((item) => (
+                    <Card className={classes.user} key={item.username} >
                         <Avatar
                             className={classes.avatar}
-                            src={item.img}
+                            src={item.imageUrl}
                         >
                             RS
                         </Avatar>
@@ -109,7 +122,7 @@ const SuggestToFollow = () => {
                                 variant='body1'
                                 align='center'
                             >
-                                {item.user_handle}
+                                {item.username}
                             </Typography>
                         </CardContent>
                         <CardActions
@@ -117,10 +130,11 @@ const SuggestToFollow = () => {
                             disableSpacing
                         >
                             <Button
+                                onClick={() => handleFollow(item.username)}
                                 variant='outlined'
                             >
                                 <Typography
-                                    variant='caption'
+                                    variant='body1'
                                     color='primary'
                                 >
                                     Follow

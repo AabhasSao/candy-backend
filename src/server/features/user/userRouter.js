@@ -40,9 +40,9 @@ router.get('/followings', userAllFollowings);
 
 router.get('/:id', userProfileProvider);
 
-router.post('/:id/follow', followOtherUser);
+router.get('/:id/follow', followOtherUser);
 
-router.post('/:id/unfollow', unfollowOtherUser);
+router.get('/:id/unfollow', unfollowOtherUser);
 
 router.get('/profile', (req, res) => {
   res.send(userAllPosts(Post));
