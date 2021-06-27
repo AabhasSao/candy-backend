@@ -8,6 +8,7 @@ const {
   unfollowOtherUser,
   userAllPosts,
   UserFeed,
+  suggestToFollow,
 } = require('./usersController');
 
 router.get('/', (req, res) => {
@@ -21,6 +22,15 @@ router.get('/feed', async (req, res) => {
     res.send(feed);
   } catch (error) {
     res.send(error);
+  }
+});
+
+router.get('/suggestions', async (req, res) => {
+  try {
+    const suggestions = await suggestToFollow();
+    res.send(suggestions);
+  } catch (e) {
+    res.send(e);
   }
 });
 

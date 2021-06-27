@@ -6,6 +6,7 @@ const Post = require('../../db/schemas/post');
 const { sequelize } = require('../../db/connect');
 
 const getUserFeed = require('./utils/getUserFeed');
+const getSuggestedFollowings = require('./utils/getSuggestedFollowings');
 
 const saltRounds = 14;
 
@@ -152,6 +153,13 @@ async function userAllPosts() {
   }
 }
 
+// suggests other users that logged in user might know or want to follow
+async function suggestToFollow() {
+  const users = await getSuggestedFollowings(User);
+  console.log(chalk.yellowBright(JSON.stringify(users)));
+  return users;
+}
+
 module.exports = {
   createUser,
   userProfileProvider,
@@ -162,4 +170,5 @@ module.exports = {
   unfollowOtherUser,
   validateFollow,
   UserFeed,
+  suggestToFollow,
 };
