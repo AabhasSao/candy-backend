@@ -2,20 +2,44 @@ const chalk = require('chalk');
 
 const users = [
   {
-    id: '1', email: 'a@gmail.com', username: 'Arietta', imageUrl: 'https://us-img.freeones.com/photos/001/3u/2v/3u2Vr3aqSxRfwpYHTKcBbE/teaser/46b757c6-93ad-4434-8137-64ef52e61c0b.jpg?c=1582550415',
-  },
-  { id: '2', email: 'b@gmail.com', username: 'Brandi' },
-  { id: '3', email: 'c@gmail.com', username: 'Chloe' },
-  {
-    id: '4', email: 'd@gmail.com', username: 'Dani', imageUrl: 'https://us-img.freeones.com/photos/001/3u/2v/3u2Vr3aqSxRfwpYHTKcBbE/teaser/46b757c6-93ad-4434-8137-64ef52e61c0b.jpg?c=1582550415',
+    id: '1',
+    email: 'a@gmail.com',
+    username: 'Arietta',
+    imageUrl: 'https://us-img.freeones.com/photos/001/3u/2v/3u2Vr3aqSxRfwpYHTKcBbE/teaser/46b757c6-93ad-4434-8137-64ef52e61c0b.jpg?c=1582550415',
   },
   {
-    id: '5', email: 'l@gmail.com', username: 'Lana', imageUrl: 'https://i1.sndcdn.com/artworks-000443942499-8okjtz-t500x500.jpg',
+    id: '2',
+    email: 'b@gmail.com',
+    username: 'Brandi',
   },
   {
-    id: '6', email: 'g@gmail.com', username: 'Gabbie', imageUrl: 'https://img-9gag-fun.9cache.com/photo/aMxV8ZA_460s.jpg',
+    id: '3',
+    email: 'c@gmail.com',
+    username: 'Chloe',
   },
-  { id: '7', email: 's@gmail.com', username: 'Skylar' },
+  {
+    id: '4',
+    email: 'd@gmail.com',
+    username: 'Dani',
+    imageUrl: 'https://us-img.freeones.com/photos/001/3u/2v/3u2Vr3aqSxRfwpYHTKcBbE/teaser/46b757c6-93ad-4434-8137-64ef52e61c0b.jpg?c=1582550415',
+  },
+  {
+    id: '5',
+    email: 'l@gmail.com',
+    username: 'Lana',
+    imageUrl: 'https://i1.sndcdn.com/artworks-000443942499-8okjtz-t500x500.jpg',
+  },
+  {
+    id: '6',
+    email: 'g@gmail.com',
+    username: 'Gabbie',
+    imageUrl: 'https://img-9gag-fun.9cache.com/photo/aMxV8ZA_460s.jpg',
+  },
+  {
+    id: '7',
+    email: 's@gmail.com',
+    username: 'Skylar',
+  },
 ];
 
 const posts = [{

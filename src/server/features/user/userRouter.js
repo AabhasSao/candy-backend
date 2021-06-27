@@ -15,8 +15,13 @@ router.get('/', (req, res) => {
   res.send(req.user);
 });
 
-router.get('/feed', (req, res) => {
-  res.send(UserFeed());
+router.get('/feed', async (req, res) => {
+  try {
+    const feed = await UserFeed();
+    res.send(feed);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.get('/followers', userAllFollowers);

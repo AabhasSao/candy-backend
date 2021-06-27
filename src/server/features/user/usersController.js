@@ -133,11 +133,12 @@ const unfollowOtherUser = async (req, res, next) => {
 async function UserFeed() {
   const user = await User.findByPk('5');
   const posts = await getUserFeed(user, Post);
+  console.log(chalk.yellow(JSON.stringify(posts)));
   return posts;
 }
 
 // Get all posts of user
-async function userAllPosts(Post) {
+async function userAllPosts() {
   const userId = 1;
   try {
     const posts = Post.find({
