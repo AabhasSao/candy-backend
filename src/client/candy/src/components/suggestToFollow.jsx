@@ -7,44 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-
-// const data = [
-//   {
-//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-//     user_handle: 'Annee',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-//     user_handle: 'Jamie',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-//     user_handle: 'Anne',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-//     user_handle: 'Annee',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-//     user_handle: 'Jamie',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-//     user_handle: 'Anne',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1524255684952-d7185b509571?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-//     user_handle: 'Annee',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1602077422495-c8733eb58c34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-//     user_handle: 'Jamie',
-//   },
-//   {
-//     img: 'https://images.unsplash.com/photo-1499540785729-ac6adfa4efbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-//     user_handle: 'Anne',
-//   },
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,21 +36,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SuggestToFollow = () => {
+const SuggestToFollow = ({ followings }) => {
   const [suggestions, setSuggestions] = useState([]);
+  const [followstatus, setFollowstatus] = useState({});
+
   const classes = useStyles();
 
+  // Triggered when Follow button is clicked
   const handleFollow = async (id) => {
     const follow = await axios.get(`http://localhost:3000/user/${id}/follow`);
+    console.log(id);
+    const obj = { ...followstatus };
+    obj[id] = !obj[id];
+    setFollowstatus(obj);
     console.log(follow);
+    console.log('followstatus', followstatus);
   };
 
+  // Fetch data during initialization of component
   useEffect(async () => {
     const sgs = await axios.get('http://localhost:3000/user/suggestions');
     setSuggestions(sgs.data);
-  }, []);
-  console.log('suggestoins', suggestions);
+    const obj = {};
 
+    console.log('followings', followings);
+
+    sgs.data.forEach((item) => {
+      let ans = false;
+      if (followings[item.username]) ans = true;
+      console.log(item.username, followings[item.username]);
+      obj[item.username] = ans;
+    });
+    setFollowstatus(obj);
+  }, [followings]);
+  console.log('suggestoins', suggestions);
+  console.log('fst', followstatus);
   return (
     <Box
         display='flex'
@@ -107,46 +90,68 @@ const SuggestToFollow = () => {
             flexDirection='row'
         >
             {
-                suggestions.map((item) => (
-                    <Card className={classes.user} key={item.username} >
-                        <Avatar
-                            className={classes.avatar}
-                            src={item.imageUrl}
-                        >
-                            RS
-                        </Avatar>
-                        <CardContent
-                            className={classes.content}
-                        >
+            suggestions.map((item) => (
+              <Card
+                className={classes.user}
+                key={item.username}
+              >
+                  <Avatar
+                      className={classes.avatar}
+                      src={item.imageUrl}
+                  >
+                      RS
+                  </Avatar>
+                  <CardContent
+                      className={classes.content}
+                  >
+                      <Typography
+                          variant='body1'
+                          align='center'
+                      >
+                          {item.username}
+                      </Typography>
+                  </CardContent>
+                  <CardActions
+                      className={classes.action}
+                      disableSpacing
+                  >
+                    {
+                      followstatus[item.username]
+                        ? (<Button
+                            onClick={() => handleFollow(item.username)}
+                            variant='outlined'
+                            color='secondary'
+                          >
                             <Typography
                                 variant='body1'
-                                align='center'
+                                color='secondary'
                             >
-                                {item.username}
+                              Unfollow
                             </Typography>
-                        </CardContent>
-                        <CardActions
-                            className={classes.action}
-                            disableSpacing
-                        >
-                            <Button
-                                onClick={() => handleFollow(item.username)}
-                                variant='outlined'
-                            >
-                                <Typography
-                                    variant='body1'
-                                    color='primary'
-                                >
-                                    Follow
-                                </Typography>
-                            </Button>
-                        </CardActions>
-                    </Card>
-                ))
+                          </Button>)
+                        : (<Button
+                              onClick={() => handleFollow(item.username)}
+                              variant='outlined'
+                          >
+                              <Typography
+                                  variant='body1'
+                                  color='primary'
+                              >
+                                Follow
+                              </Typography>
+                          </Button>)
+                    }
+                  </CardActions>
+              </Card>
+            ))
             }
         </Box>
     </Box>
   );
+};
+
+SuggestToFollow.propTypes = {
+  followings: PropTypes.object,
 };
 
 export default SuggestToFollow;

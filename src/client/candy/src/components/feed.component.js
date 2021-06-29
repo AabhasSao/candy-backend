@@ -9,7 +9,6 @@ const Feed = () => {
     const feed = await axios.get('http://localhost:3000/user/feed');
     setPosts(feed.data);
   }, []);
-  console.log(posts);
 
   return (
         <Box

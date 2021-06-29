@@ -67,7 +67,7 @@ const userAllFollowers = async (req, res) => {
 
 // List of all people user is following
 const userAllFollowings = async (req, res) => {
-  await User.findByPk('1').then((user) => {
+  await User.findByPk('5').then((user) => {
     user.getFollowings().then((followings) => {
       res.send(followings).catch((e) => e);
     }).catch((e) => e);

@@ -17,8 +17,8 @@ import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '350px',
-    margin: 'auto',
+    maxWidth: '600px',
+    margin: 'auto auto 1.4em auto',
     backgroundColor: theme.primary,
   },
   avatar: {
