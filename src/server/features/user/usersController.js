@@ -57,7 +57,7 @@ const userProfileProvider = async (req, res) => {
 
 // List all followers of a user
 const userAllFollowers = async (req, res) => {
-  await User.findByPk('1')
+  await User.findByPk('5')
     .then((user) => {
       user.getFollowers().then((followers) => {
         res.send(followers).catch((e) => e);
@@ -77,7 +77,7 @@ const userAllFollowings = async (req, res) => {
 // Check if already following or not if already a follower returns false
 const validateFollow = async (id) => {
   try {
-    const follower = await User.findByPk('1');
+    const follower = await User.findByPk('5');
     const followings = await follower.getFollowings({ where: { username: id } });
     if (followings.length) {
       return false;
@@ -98,7 +98,7 @@ const followOtherUser = async (req, res, next) => {
       return res.send('Already a follower');
     }
 
-    const me = await User.findByPk('1');
+    const me = await User.findByPk('5');
     const otherUser = await User.findOne({ where: { username: id } });
     otherUser.addFollower(me);
 
@@ -140,7 +140,7 @@ async function UserFeed() {
 
 // Get all posts of user
 async function userAllPosts() {
-  const userId = 1;
+  const userId = 5;
   try {
     const posts = Post.find({
       where: {

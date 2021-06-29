@@ -1,4 +1,4 @@
-// const chalk = require('chalk');
+const chalk = require('chalk');
 
 module.exports = async function getUserFeed(user, Post) {
   try {
@@ -12,7 +12,7 @@ module.exports = async function getUserFeed(user, Post) {
         userId: followings,
       },
     });
-    // console.log(chalk.yellowBright(JSON.stringify(posts)));
+    console.log(chalk.green(JSON.stringify(posts)));
     return posts;
   } catch (error) {
     // console.log(chalk.redBright(error));

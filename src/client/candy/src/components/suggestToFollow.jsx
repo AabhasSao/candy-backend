@@ -44,13 +44,14 @@ const SuggestToFollow = ({ followings }) => {
 
   // Triggered when Follow button is clicked
   const handleFollow = async (id) => {
+    if (followings[id]) return;
     const follow = await axios.get(`http://localhost:3000/user/${id}/follow`);
-    console.log(id);
+    // console.log(id);
     const obj = { ...followstatus };
     obj[id] = !obj[id];
     setFollowstatus(obj);
     console.log(follow);
-    console.log('followstatus', followstatus);
+    // console.log('followstatus', followstatus);
   };
 
   // Fetch data during initialization of component
@@ -59,18 +60,18 @@ const SuggestToFollow = ({ followings }) => {
     setSuggestions(sgs.data);
     const obj = {};
 
-    console.log('followings', followings);
+    // console.log('followings', followings);
 
     sgs.data.forEach((item) => {
       let ans = false;
       if (followings[item.username]) ans = true;
-      console.log(item.username, followings[item.username]);
+      // console.log(item.username, followings[item.username]);
       obj[item.username] = ans;
     });
     setFollowstatus(obj);
   }, [followings]);
-  console.log('suggestoins', suggestions);
-  console.log('fst', followstatus);
+  // console.log('suggestoins', suggestions);
+  // console.log('fst', followstatus);
   return (
     <Box
         display='flex'

@@ -51,19 +51,34 @@ const posts = [{
   userId: '1',
 },
 {
-  postId: '1',
+  postId: '2',
   imageUrl: 'https://images.unsplash.com/photo-1624571381490-4ad98eb53445?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
   userId: '1',
 },
 {
-  postId: '1',
+  postId: '3',
   imageUrl: 'https://images.unsplash.com/photo-1624669764959-a12dc4608255?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
   userId: '4',
 },
 {
-  postId: '1',
+  postId: '4',
   imageUrl: 'https://images.unsplash.com/photo-1624644489153-36d7b5956786?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
   userId: '4',
+},
+{
+  postId: '5',
+  imageUrl: 'https://images.unsplash.com/photo-1604917621956-10dfa7cce2e7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=612&q=80',
+  userId: '2',
+},
+{
+  postId: '6',
+  imageUrl: 'https://images.unsplash.com/photo-1568564321589-3e581d074f9b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  userId: '6',
+},
+{
+  postId: '7',
+  imageUrl: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+  userId: '6',
 },
 ];
 
@@ -86,13 +101,13 @@ module.exports = async (sequelize, User, Post) => {
   await dani.addFollowers([gabbie, lana, arietta]);
 
   await arietta.addFollowers([gabbie, lana, chloe]);
-  await arietta.getFollowers({ attributes: ['username', 'id'] }).then((res) => {
-    console.log(chalk.green(JSON.stringify(res)));
-  });
+  // await arietta.getFollowers({ attributes: ['username', 'id'] }).then((res) => {
+  //   console.log(chalk.green(JSON.stringify(res)));
+  // });
 
-  await lana.getFollowings({ attributes: ['username', 'id'] }).then((res) => {
-    console.log(chalk.green(JSON.stringify(res)));
-  });
+  // await lana.getFollowings({ attributes: ['username', 'id'] }).then((res) => {
+  //   console.log(chalk.green(JSON.stringify(res)));
+  // });
 
   // Create Posts by Arietta and Dani
   await Post.bulkCreate(posts);
@@ -103,5 +118,5 @@ module.exports = async (sequelize, User, Post) => {
     },
   });
   // const ariettaPosts = await arietta.getPosts();
-  console.log(chalk.blueBright(JSON.stringify(ps)));
+  // console.log(chalk.blueBright(JSON.stringify(ps)));
 };
