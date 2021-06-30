@@ -40,7 +40,10 @@ const Profile = () => {
         break;
       }
       rowItems.push(
-      <div className="gallery-item">
+      <div
+        className="gallery-item"
+        key={j}
+      >
         <div className={'post-container'}>
           <img src={tileData[j].download_url} key={tileData[j].id} />
         </div>

@@ -48,5 +48,5 @@ app.use('/user', userRouter);
 initDB(sequelize, User, Post);
 
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+  // console.log(`listening on port ${PORT}`);
 });

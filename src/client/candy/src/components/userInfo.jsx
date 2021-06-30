@@ -55,7 +55,7 @@ const UserInfo = () => {
         />
         <CardContent className={classes.right} >
           <Box
-            flex
+            display='flex'
             flexDirection='column'
           >
             <List

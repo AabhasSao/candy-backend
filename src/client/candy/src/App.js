@@ -28,7 +28,7 @@ function App() {
       obj[item.username] = true;
     });
     setFollowings(obj);
-    console.log(obj);
+    // console.log(obj);
   }, []);
 
   // useEffect(() => {
