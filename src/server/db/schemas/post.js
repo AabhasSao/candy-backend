@@ -5,6 +5,7 @@ const Comment = require('./comment');
 const Post = sequelize.define('Post', {
   postId: {
     type: DataTypes.STRING,
+    primaryKey: true,
   },
   imageUrl: {
     type: DataTypes.STRING(800),

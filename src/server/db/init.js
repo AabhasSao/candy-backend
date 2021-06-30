@@ -1,5 +1,7 @@
 // const chalk = require('chalk');
 
+const chalk = require('chalk');
+
 const users = [
   {
     id: '1',
@@ -133,4 +135,7 @@ module.exports = async (sequelize, User, Post) => {
   // });
   // const ariettaPosts = await arietta.getPosts();
   // console.log(chalk.blueBright(JSON.stringify(ps)));
+
+  const post = await Post.findByPk('1');
+  console.log(chalk.red(JSON.stringify(post)));
 };

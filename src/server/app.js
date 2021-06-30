@@ -9,6 +9,7 @@ const { sequelize } = require('./db/connect');
 const authRouter = require('./features/auth/authRouter');
 const indexRouter = require('./features/index');
 const userRouter = require('./features/user/userRouter');
+const postRouter = require('./features/post/postRouter');
 const initDB = require('./db/init');
 const User = require('./db/schemas/user');
 const Post = require('./db/schemas/post');
@@ -38,7 +39,7 @@ app.use(passport.session());
 
 // Routing ---------------------
 app.use('/', indexRouter);
-// app.use('/post', postsRouter);
+app.use('/post', postRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 // app.get('/success', (req, res) => res.send(userProfile));

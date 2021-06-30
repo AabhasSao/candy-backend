@@ -24,6 +24,7 @@ const Feed = ({ followings }) => {
                     userImg={post.User.imageUrl}
                     description={post.description}
                     likes={post.likes}
+                    id={post.postId}
                 />)
             }
         </Box>

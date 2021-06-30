@@ -1,4 +1,5 @@
-const { Post } = require('../../db/schemas/post');
+const chalk = require('chalk');
+const Post = require('../../db/schemas/post');
 
 async function createPost(req, res) {
   const { userId } = req.body;
@@ -17,9 +18,9 @@ async function createPost(req, res) {
 
 const like = async (id) => {
   try {
-    const post = await Post.findByPK(id);
+    const post = await Post.findByPk(id);
     post.increment('likes');
-    return 'success';
+    return post;
   } catch (e) {
     return e;
   }
@@ -27,9 +28,9 @@ const like = async (id) => {
 
 const dislike = async (id) => {
   try {
-    const post = await Post.findByPK(id);
+    const post = await Post.findByPk(id);
     post.decrement('likes');
-    return 'success';
+    return post;
   } catch (e) {
     return e;
   }

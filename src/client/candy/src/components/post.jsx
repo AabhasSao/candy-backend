@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -33,10 +34,30 @@ const Post = (
     userImg,
     description,
     likes,
+    id,
   },
 ) => {
   const classes = useStyles();
   const [like, setLike] = useState(false);
+  const [likecount, setLikecount] = useState(0);
+
+  const handleClickLike = async () => {
+    const liked = like;
+    setLike((prevState) => !prevState);
+    if (!liked) {
+      const res = await axios.get(`http://localhost:3000/post/${id}/like`);
+      console.log('res', res);
+      if (res) setLikecount((prevState) => prevState + 1);
+    } else {
+      const res = await axios.get(`http://localhost:3000/post/${id}/dislike`);
+      if (res) setLikecount((prevState) => prevState - 1);
+    }
+  };
+
+  useEffect(() => {
+    setLikecount(likes);
+  }, []);
+
   return (
         <Card className={classes.root}>
           <CardHeader
@@ -58,7 +79,7 @@ const Post = (
           <CardActions>
             <IconButton
               color='primary'
-              onClick={ () => setLike(!like)}
+              onClick={handleClickLike}
             >
               {
                 like ? <FavoriteIcon /> : <FavoriteBorderIcon />
@@ -73,7 +94,7 @@ const Post = (
             <Typography
               variant='subtitle2'
             >
-              {likes.toLocaleString()} likes
+              {likecount.toLocaleString()} likes
             </Typography>
             <Typography
               variant='body1'
@@ -92,6 +113,7 @@ Post.propTypes = {
   userImg: PropTypes.string.isRequired,
   description: PropTypes.string,
   likes: PropTypes.number,
+  id: PropTypes.string,
 };
 
 export default Post;
