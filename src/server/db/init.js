@@ -48,35 +48,42 @@ const users = [
 const posts = [{
   postId: '1',
   imageUrl: 'https://images.unsplash.com/photo-1624635800443-cfff1e505a0b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  description: 'cat',
   userId: '1',
 },
 {
   postId: '2',
   imageUrl: 'https://images.unsplash.com/photo-1624571381490-4ad98eb53445?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  description: 'dog',
   userId: '1',
 },
 {
   postId: '3',
   imageUrl: 'https://images.unsplash.com/photo-1624669764959-a12dc4608255?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  description: 'just some random click',
   userId: '4',
 },
 {
   postId: '4',
   imageUrl: 'https://images.unsplash.com/photo-1624644489153-36d7b5956786?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  description: 'me with my dad. good old dayz.',
   userId: '4',
 },
 {
   postId: '5',
   imageUrl: 'https://images.unsplash.com/photo-1604917621956-10dfa7cce2e7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=612&q=80',
+  description: 'hello im 4 months old and cut',
   userId: '2',
 },
 {
   postId: '6',
   imageUrl: 'https://images.unsplash.com/photo-1568564321589-3e581d074f9b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+  description: 'doggo',
   userId: '6',
 },
 {
   postId: '7',
+  description: 'ps5',
   imageUrl: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
   userId: '6',
 },

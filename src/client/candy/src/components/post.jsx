@@ -26,7 +26,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ url, username, userImg }) => {
+const Post = (
+  {
+    url,
+    username,
+    userImg,
+    description,
+  },
+) => {
   const classes = useStyles();
   const [like, setLike] = useState(false);
   return (
@@ -66,10 +73,7 @@ const Post = ({ url, username, userImg }) => {
               variant='body1'
               component='p'
             >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita,
-              consequuntur! Voluptatem et neque, dolor voluptate suscipit molestiae
-              asperiores harum officia consequatur rem cumque voluptas voluptatibus.
-              Incidunt, adipisci. Ex, possimus molestias?
+              {description}
             </Typography>
           </CardContent>
         </Card>
@@ -80,6 +84,7 @@ Post.propTypes = {
   url: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userImg: PropTypes.string.isRequired,
+  description: PropTypes.string,
 };
 
 export default Post;
