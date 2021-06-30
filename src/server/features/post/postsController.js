@@ -15,6 +15,28 @@ async function createPost(req, res) {
   }
 }
 
+const like = async (id) => {
+  try {
+    const post = await Post.findByPK(id);
+    post.increment('likes');
+    return 'success';
+  } catch (e) {
+    return e;
+  }
+};
+
+const dislike = async (id) => {
+  try {
+    const post = await Post.findByPK(id);
+    post.decrement('likes');
+    return 'success';
+  } catch (e) {
+    return e;
+  }
+};
+
 module.exports = {
   createPost,
+  like,
+  dislike,
 };

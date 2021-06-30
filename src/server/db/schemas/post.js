@@ -16,6 +16,10 @@ const Post = sequelize.define('Post', {
     allowNull: true,
     defaultValue: '',
   },
+  likes: {
+    type: DataTypes.BIGINT,
+    defaultValue: 0,
+  },
 }, {
   timestamps: true,
   createdAt: true,

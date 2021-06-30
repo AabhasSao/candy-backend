@@ -32,6 +32,7 @@ const Post = (
     username,
     userImg,
     description,
+    likes,
   },
 ) => {
   const classes = useStyles();
@@ -70,6 +71,11 @@ const Post = (
           </CardActions>
           <CardContent>
             <Typography
+              variant='subtitle2'
+            >
+              {likes.toLocaleString()} likes
+            </Typography>
+            <Typography
               variant='body1'
               component='p'
             >
@@ -85,6 +91,7 @@ Post.propTypes = {
   username: PropTypes.string.isRequired,
   userImg: PropTypes.string.isRequired,
   description: PropTypes.string,
+  likes: PropTypes.number,
 };
 
 export default Post;
