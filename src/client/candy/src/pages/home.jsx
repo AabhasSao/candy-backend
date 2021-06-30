@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Feed from '../components/feed.component';
+import Feed from '../components/feed.jsx';
 import SuggestToFollow from '../components/suggestToFollow.jsx';
 
 const Home = ({ followings }) => (

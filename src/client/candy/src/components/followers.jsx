@@ -4,10 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import FollowersTemplate from './followersTemplate.jsx';
 
 const Following = () => {
-  const [followings, setFollowings] = useState([]);
+  const [followers, setFollowers] = useState([]);
   useEffect(async () => {
-    const res = await axios.get('http://localhost:3000/user/followings');
-    setFollowings(res.data);
+    const res = await axios.get('http://localhost:3000/user/followers');
+    setFollowers(res.data);
   }, []);
   return (<>
     <Typography
@@ -15,9 +15,9 @@ const Following = () => {
       align='center'
       color='primary'
     >
-      Following
+      Followers
     </Typography>
-    <FollowersTemplate data={followings} />
+    <FollowersTemplate data={followers} />
   </>);
 };
 

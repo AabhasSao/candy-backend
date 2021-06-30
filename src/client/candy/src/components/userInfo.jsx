@@ -86,14 +86,14 @@ const UserInfo = () => {
               <ListItem
                 button
                 component={Link}
-                to='/user/foo'
+                to='/user/followers'
               >
                <ListItemText primary='236 followers' />
               </ListItem>
               <ListItem
                 button
                 component={Link}
-                to='/user/foo'
+                to='/user/followings'
               >
                <ListItemText primary='23 followings' />
               </ListItem>

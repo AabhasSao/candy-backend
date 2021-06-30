@@ -67,11 +67,13 @@ const userAllFollowers = async (req, res) => {
 
 // List of all people user is following
 const userAllFollowings = async (req, res) => {
-  await User.findByPk('5').then((user) => {
-    user.getFollowings().then((followings) => {
-      res.send(followings).catch((e) => e);
-    }).catch((e) => e);
-  });
+  try {
+    const me = await User.findByPk('5');
+    const followings = await me.getFollowings();
+    res.send(followings);
+  } catch (e) {
+    res.send(e);
+  }
 };
 
 // Check if already following or not if already a follower returns false

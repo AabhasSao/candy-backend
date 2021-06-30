@@ -8,6 +8,7 @@ import tileData from '../dummy_data/posts.json';
 import '../assets/css/gallery.css';
 import UserInfo from '../components/userInfo.jsx';
 import Following from '../components/following.jsx';
+import Followers from '../components/followers.jsx';
 
 const useStyles = makeStyles({
   root: {
@@ -60,7 +61,8 @@ const Profile = () => {
             {gallery}
           </div>
         </Route>
-        <Route exact={true} path={`${url}/foo`} component={Following} />
+        <Route exact={true} path={`${url}/followings`} component={Following} />
+        <Route exact={true} path={`${url}/followers`} component={Followers} />
       </Paper>
   );
 };

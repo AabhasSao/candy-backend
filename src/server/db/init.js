@@ -99,7 +99,7 @@ module.exports = async (sequelize, User, Post) => {
   const dani = await User.findByPk('4');
 
   await dani.addFollowers([gabbie, lana, arietta]);
-
+  await lana.addFollowers([chloe, dani]);
   await arietta.addFollowers([gabbie, lana, chloe]);
   // await arietta.getFollowers({ attributes: ['username', 'id'] }).then((res) => {
   //   console.log(chalk.green(JSON.stringify(res)));
