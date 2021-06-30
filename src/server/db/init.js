@@ -112,11 +112,11 @@ module.exports = async (sequelize, User, Post) => {
   // Create Posts by Arietta and Dani
   await Post.bulkCreate(posts);
 
-  const ps = await Post.findAll({
-    where: {
-      userId: ['1', '4'],
-    },
-  });
+  // const ps = await Post.findAll({
+  //   where: {
+  //     userId: ['1', '4'],
+  //   },
+  // });
   // const ariettaPosts = await arietta.getPosts();
   // console.log(chalk.blueBright(JSON.stringify(ps)));
 };

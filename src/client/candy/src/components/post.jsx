@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ url }) => {
+const Post = ({ url, username, userImg }) => {
   const classes = useStyles();
   const [like, setLike] = useState(false);
   return (
@@ -35,11 +35,12 @@ const Post = ({ url }) => {
             avatar={
               <Avatar
                 className={classes.avatar}
+                src={userImg}
               >
                 R
               </Avatar>
             }
-            title='kirito'
+            title={username}
             subheader='planet Earth'
           />
           <CardMedia
@@ -77,6 +78,8 @@ const Post = ({ url }) => {
 
 Post.propTypes = {
   url: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  userImg: PropTypes.string.isRequired,
 };
 
 export default Post;

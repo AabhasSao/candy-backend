@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const User = require('../../../db/schemas/user');
 
 module.exports = async function getUserFeed(user, Post) {
   try {
@@ -11,6 +12,9 @@ module.exports = async function getUserFeed(user, Post) {
       where: {
         userId: followings,
       },
+      include: [
+        { model: User, attributes: ['username', 'imageUrl'] },
+      ],
     });
     console.log(chalk.green(JSON.stringify(posts)));
     return posts;
