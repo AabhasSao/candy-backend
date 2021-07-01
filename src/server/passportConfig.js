@@ -71,8 +71,8 @@ module.exports = (passport) => {
   // }));
 
   passport.serializeUser((user, cb) => {
-    console.log(chalk.yellow('serializing', user.userId));
-    cb(null, user.userId);
+    console.log(chalk.yellow('serializing', user.id));
+    cb(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {

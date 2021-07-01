@@ -16,7 +16,7 @@ async function createUser(email, username, password) {
     const hash = await bcrypt.hashSync(password, saltRounds);
 
     const res = await User.create({
-      userId: nanoid(),
+      id: nanoid(),
       email,
       username,
       lastLogin: sequelize.fn('NOW'),

@@ -42,8 +42,8 @@ app.use('/', indexRouter);
 app.use('/post', postRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
-// app.get('/success', (req, res) => res.send(userProfile));
-// app.get('/error', (req, res) => res.send('error logging in'));
+app.get('/success', (req, res) => res.send(req));
+app.get('/error', (req, res) => res.send('error logging in'));
 
 // db
 initDB(sequelize, User, Post);
