@@ -7,7 +7,7 @@ const {
 } = require('./postsController');
 
 router.get('/', (req, res) => {
-  console.log(chalk.red(req.isAuthenticated()))
+  console.log(chalk.red(req.isAuthenticated()));
   res.send('post');
 });
 

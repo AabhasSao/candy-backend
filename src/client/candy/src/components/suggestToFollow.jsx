@@ -45,7 +45,7 @@ const SuggestToFollow = ({ followings }) => {
   // Triggered when Follow button is clicked
   const handleFollow = async (id) => {
     if (followings[id]) return;
-    const follow = await axios.get(`http://localhost:3000/user/${id}/follow`);
+    const follow = await axios.get(`http://localhost:3000/user/${id}/follow`, { withCredentials: true });
     // console.log(id);
     const obj = { ...followstatus };
     obj[id] = !obj[id];

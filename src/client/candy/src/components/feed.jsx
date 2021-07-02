@@ -7,7 +7,7 @@ import Post from './post.jsx';
 const Feed = ({ followings }) => {
   const [posts, setPosts] = useState([]);
   useEffect(async () => {
-    const feed = await axios.get('http://localhost:3000/user/feed');
+    const feed = await axios.get('http://localhost:3000/user/feed', { withCredentials: true });
     setPosts(feed.data);
   }, [followings]);
 
