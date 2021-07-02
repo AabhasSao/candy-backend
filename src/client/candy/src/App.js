@@ -23,6 +23,10 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(async () => {
+    const auth = await axios.get('http://localhost:3000/auth/', { withCredentials: true });
+    if (auth.status === 200) {
+      setIsAuthenticated(true);
+    }
     if (isAuthenticated) {
       const res = await axios.get('http://localhost:3000/user/followings', { withCredentials: true });
       const obj = {};

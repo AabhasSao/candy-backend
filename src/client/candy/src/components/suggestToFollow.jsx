@@ -56,7 +56,7 @@ const SuggestToFollow = ({ followings }) => {
 
   // Fetch data during initialization of component
   useEffect(async () => {
-    const sgs = await axios.get('http://localhost:3000/user/suggestions');
+    const sgs = await axios.get('http://localhost:3000/user/suggestions', { withCredentials: true });
     setSuggestions(sgs.data);
     const obj = {};
 
