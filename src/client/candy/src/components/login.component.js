@@ -39,6 +39,7 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
         <Button
           variant='outlined'
           color='primary'
+          type='submit'
         >
             Login
         </Button>

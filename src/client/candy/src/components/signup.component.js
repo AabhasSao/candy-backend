@@ -38,6 +38,7 @@ const SignUp = ({ setShowlogin }) => {
         <Button
           variant='outlined'
           color='primary'
+          type='submit'
         >
             Signup
         </Button>

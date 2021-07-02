@@ -33,9 +33,10 @@ function App() {
     }
   }, [isAuthenticated]);
 
-  if (isAuthenticated) {
-    return (
-      <ThemeProvider theme={theme} >
+  return <ThemeProvider theme={theme} >
+    {
+      (isAuthenticated)
+        ? (<>
         <Switch>
           <Route path='/user'>
             <Profile />
@@ -45,9 +46,10 @@ function App() {
           </Route>
         </Switch>
         <NavigationBar />
-      </ThemeProvider>);
-  }
-  return <Authentication setIsAuthenticated={setIsAuthenticated} />;
+        </>)
+        : <Authentication setIsAuthenticated={setIsAuthenticated} />
+    }
+  </ThemeProvider>;
 }
 
 export default App;
