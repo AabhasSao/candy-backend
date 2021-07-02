@@ -18,7 +18,7 @@ const Feed = ({ followings }) => {
         >
             {
                 posts.map((post) => <Post
-                    key={post.id}
+                    key={post.postId}
                     url={post.imageUrl}
                     username={post.User.username}
                     userImg={post.User.imageUrl}

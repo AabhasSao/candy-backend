@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import FormGroup from '@material-ui/core/FormGroup';
+import Typography from '@material-ui/core/Typography';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setIsAuthenticated, setShowlogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,8 +36,19 @@ const Login = ({ setIsAuthenticated }) => {
           <label htmlFor="password">Password</label>
           <input name='password' type='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <button>Login</button>
-        <Link to='/signup'>Create an account</Link>
+        <Button
+          variant='outlined'
+          color='primary'
+        >
+            Login
+        </Button>
+        <FormGroup>
+          <Link onClick={() => setShowlogin(false)} >
+            <Typography>
+              Create an account
+            </Typography>
+          </Link>
+        </FormGroup>
       </form>
     </div>
   );
@@ -42,6 +56,7 @@ const Login = ({ setIsAuthenticated }) => {
 
 Login.propTypes = {
   setIsAuthenticated: PropTypes.func,
+  setShowlogin: PropTypes.func,
 };
 
 export default Login;

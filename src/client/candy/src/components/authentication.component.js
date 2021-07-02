@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
 import Login from './login.component';
 import SignUp from './signup.component';
 
+const useStyles = makeStyles({
+  root: {
+    width: '80vw',
+    margin: 'auto',
+    padding: '3em',
+
+  },
+});
+
 const Authentication = ({ setIsAuthenticated }) => {
-  const history = useHistory();
-
-  // show login component by default in authentication component
-  useEffect(() => {
-    history.push('/login');
-  }, []);
-
-  return (<Switch>
-    <Route path='/signup'>
-      <SignUp/>
-    </Route>
-    <Route path='/login'>
-      <Login setIsAuthenticated={setIsAuthenticated}/>
-    </Route>
-  </Switch>);
+  const [showlogin, setShowlogin] = useState(true);
+  const classes = useStyles();
+  return <Card className={classes.root}>
+    {
+      (showlogin)
+        ? <Login
+          setShowlogin={setShowlogin}
+          setIsAuthenticated={setIsAuthenticated}
+        />
+        : <SignUp setShowlogin={setShowlogin} />
+    }
+ </Card>;
 };
 
 Authentication.propTypes = {

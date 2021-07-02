@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import FormGroup from '@material-ui/core/FormGroup';
 import axios from 'axios';
 
-const SignUp = () => {
+const SignUp = ({ setShowlogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -31,10 +35,27 @@ const SignUp = () => {
           <label htmlFor="password">Password</label>
           <input name='password' type='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <button>Signup</button>
-        <Link to='/login'>Already have an account</Link>
+        <Button
+          variant='outlined'
+          color='primary'
+        >
+            Signup
+        </Button>
+        <FormGroup>
+          <Link onClick={() => setShowlogin(true)} >
+            <Typography
+              color='primary'
+            >
+              Already have an account
+            </Typography>
+          </Link>
+        </FormGroup>
       </form>
     </div>);
+};
+
+SignUp.propTypes = {
+  setShowlogin: PropTypes.func,
 };
 
 export default SignUp;

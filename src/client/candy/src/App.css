@@ -10,8 +10,16 @@ input {
   margin-bottom: 2em;
 }
 
+a {
+  cursor: pointer;
+}
+
+form {
+  margin: auto;
+  text-align: center;
+}
+
 label {
-  color: white;
   display: block;
 }
 
