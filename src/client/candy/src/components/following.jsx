@@ -6,7 +6,7 @@ import FollowersTemplate from './followersTemplate.jsx';
 const Following = () => {
   const [followings, setFollowings] = useState([]);
   useEffect(async () => {
-    const res = await axios.get('http://localhost:3000/user/followings');
+    const res = await axios.get('http://localhost:3000/user/followings', { withCredentials: true });
     setFollowings(res.data);
   }, []);
   return (<>

@@ -3,11 +3,12 @@ import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Post from './post.jsx';
+import { userRoutes } from '../routes/routes';
 
 const Feed = ({ followings }) => {
   const [posts, setPosts] = useState([]);
   useEffect(async () => {
-    const feed = await axios.get('http://localhost:3000/user/feed', { withCredentials: true });
+    const feed = await axios.get(userRoutes.feed, { withCredentials: true });
     setPosts(feed.data);
   }, [followings]);
 

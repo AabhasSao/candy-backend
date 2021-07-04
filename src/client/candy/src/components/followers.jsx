@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import FollowersTemplate from './followersTemplate.jsx';
+import { userRoutes } from '../routes/routes';
 
-const Following = () => {
+const Followers = () => {
   const [followers, setFollowers] = useState([]);
   useEffect(async () => {
-    const res = await axios.get('http://localhost:3000/user/followers');
+    const res = await axios.get(userRoutes.followers, { withCredentials: true });
     setFollowers(res.data);
   }, []);
   return (<>
@@ -21,4 +22,4 @@ const Following = () => {
   </>);
 };
 
-export default Following;
+export default Followers;

@@ -86,7 +86,6 @@ const followOtherUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const follower = await validateFollow(user, id);
-    console.log(chalk.green(follower));
     if (!follower) {
       return res.send('Already a follower');
     }
