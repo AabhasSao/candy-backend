@@ -16,15 +16,17 @@ router.get('/', (req, res) => {
   res.send(req.user);
 });
 
+// Curated posts for user feed
 router.get('/feed', async (req, res) => {
   try {
-    const feed = await UserFeed();
+    const feed = await UserFeed(req.user);
     res.send(feed);
   } catch (error) {
     res.send(error);
   }
 });
 
+// Suggest whom to follow
 router.get('/suggestions', async (req, res) => {
   try {
     const suggestions = await suggestToFollow();
@@ -34,20 +36,31 @@ router.get('/suggestions', async (req, res) => {
   }
 });
 
-router.get('/followers', userAllFollowers);
+// All followers of a user
+router.get('/followers', async (req, res) => {
+  const followers = userAllFollowers(req.user);
+  if (followers) {
+    res.send(followers);
+  } else {
+    res.sendStatus(401);
+  }
+});
 
+// List of accounts followed by user
 router.get('/followings', userAllFollowings);
 
+// Send info about any user profile
 router.get('/:id', userProfileProvider);
 
+// User follows other account
 router.get('/:id/follow', followOtherUser);
 
+// User unfollows other account
 router.get('/:id/unfollow', unfollowOtherUser);
 
+// Get all posts created by user
 router.get('/profile', (req, res) => {
   res.send(userAllPosts(Post));
 });
-
-// router.post('/:id/following', valiteFollow);
 
 module.exports = router;

@@ -4,10 +4,10 @@ const path = require('path');
 const chalk = require('chalk');
 
 router.get('/', (req, res) => {
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     res.sendStatus(200);
   } else res.send(401);
-})
+});
 
 router.get('/login', (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/../../public/login.html`));

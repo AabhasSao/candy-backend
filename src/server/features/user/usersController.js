@@ -43,33 +43,24 @@ const userProfileProvider = async (req, res) => {
     .catch((e) => { res.json(e); });
 };
 
-// const valiteFollow = async (req, res, next) => {
-//   const { id } = req.params;
-//   await User.findByPk('1').then((user) => {
-//     user.getFollowers({
-//       where: {
-//         username: id,
-//       },
-//     }).then((follower) => res.send(follower))
-//       .catch((e) => e);
-//   });
-// };
-
 // List all followers of a user
-const userAllFollowers = async (req, res) => {
-  await User.findByPk('5')
-    .then((user) => {
-      user.getFollowers().then((followers) => {
-        res.send(followers).catch((e) => e);
-      }).catch((e) => e);
-    });
+const userAllFollowers = async (user) => {
+  if (typeof user === 'undefined') {
+    return undefined;
+  }
+  try {
+    const followers = await user.getFollowers();
+    return followers;
+  } catch (e) {
+    return undefined;
+  }
 };
 
 // List of all people user is following
 const userAllFollowings = async (req, res) => {
+  const { user } = req;
   try {
-    const me = await User.findByPk('5');
-    const followings = await me.getFollowings();
+    const followings = await user.getFollowings();
     res.send(followings);
   } catch (e) {
     res.send(e);
@@ -77,10 +68,9 @@ const userAllFollowings = async (req, res) => {
 };
 
 // Check if already following or not if already a follower returns false
-const validateFollow = async (id) => {
+const validateFollow = async (user, id) => {
   try {
-    const follower = await User.findByPk('5');
-    const followings = await follower.getFollowings({ where: { username: id } });
+    const followings = await user.getFollowings({ where: { username: id } });
     if (followings.length) {
       return false;
     }
@@ -92,17 +82,17 @@ const validateFollow = async (id) => {
 
 // follow a user
 const followOtherUser = async (req, res, next) => {
+  const { user } = req;
   try {
     const { id } = req.params;
-    const follower = await validateFollow(id);
-
+    const follower = await validateFollow(user, id);
+    console.log(chalk.green(follower));
     if (!follower) {
       return res.send('Already a follower');
     }
 
-    const me = await User.findByPk('5');
     const otherUser = await User.findOne({ where: { username: id } });
-    otherUser.addFollower(me);
+    otherUser.addFollower(user);
 
     return res.send(`you followed ${otherUser.username}`);
   } catch (e) {
@@ -113,6 +103,7 @@ const followOtherUser = async (req, res, next) => {
 
 // unfollow another user
 const unfollowOtherUser = async (req, res, next) => {
+  const { user } = req;
   try {
     const { id } = req.params;
     const follower = await validateFollow(id);
@@ -121,9 +112,8 @@ const unfollowOtherUser = async (req, res, next) => {
       return res.send('Not Following User');
     }
 
-    const me = await User.findByPk('1');
     const otherUser = await User.findOne({ where: { username: id } });
-    otherUser.removeFollower(me);
+    otherUser.removeFollower(user);
     return res.send(`you unfollowed ${otherUser.username}`);
   } catch (e) {
     next(e);
@@ -133,20 +123,18 @@ const unfollowOtherUser = async (req, res, next) => {
 
 // Prepare User feed and return
 
-async function UserFeed() {
-  const user = await User.findByPk('5');
+async function UserFeed(user) {
   const posts = await getUserFeed(user, Post);
-  console.log(chalk.yellow(JSON.stringify(posts)));
+  // console.log(chalk.yellow(JSON.stringify(posts)));
   return posts;
 }
 
 // Get all posts of user
-async function userAllPosts() {
-  const userId = 5;
+async function userAllPosts(user) {
   try {
     const posts = Post.find({
       where: {
-        userId,
+        userId: user.id,
       },
     });
     return posts;
@@ -158,7 +146,7 @@ async function userAllPosts() {
 // suggests other users that logged in user might know or want to follow
 async function suggestToFollow() {
   const users = await getSuggestedFollowings(User);
-  console.log(chalk.yellowBright(JSON.stringify(users)));
+  // console.log(chalk.yellowBright(JSON.stringify(users)));
   return users;
 }
 

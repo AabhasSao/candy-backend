@@ -1,6 +1,7 @@
 // const chalk = require('chalk');
 
 const chalk = require('chalk');
+const { createUser } = require('../features/user/usersController');
 
 const users = [
   {
@@ -107,7 +108,7 @@ module.exports = async (sequelize, User, Post) => {
   await sequelize.sync({ force: true });
 
   await User.bulkCreate(users);
-
+  const pikachu = await createUser('aabhassao0@gmail.com', 'pika', 'dora');
   const arietta = await User.findByPk('1');
   const gabbie = await User.findByPk('6');
   const lana = await User.findByPk('5');
@@ -138,4 +139,6 @@ module.exports = async (sequelize, User, Post) => {
 
   const post = await Post.findByPk('1');
   console.log(chalk.red(JSON.stringify(post)));
+
+  await pikachu.addFollowings([lana, gabbie, arietta]);
 };
