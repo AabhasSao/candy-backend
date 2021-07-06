@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+// const chalk = require('chalk');
 const User = require('../../../db/schemas/user');
 
 module.exports = async function getUserFeed(user, Post) {
@@ -16,7 +16,7 @@ module.exports = async function getUserFeed(user, Post) {
         { model: User, attributes: ['username', 'imageUrl'] },
       ],
     });
-    console.log(chalk.green(JSON.stringify(posts)));
+    // console.log(chalk.green(JSON.stringify(posts)));
     return posts;
   } catch (error) {
     // console.log(chalk.redBright(error));

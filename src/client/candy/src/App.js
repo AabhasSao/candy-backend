@@ -8,6 +8,7 @@ import Profile from './pages/profile.jsx';
 import Home from './pages/home.jsx';
 import NavigationBar from './components/navigation.jsx';
 import Authentication from './components/authentication.component';
+import FileUploader from './utils/fileUploader.jsx';
 
 let theme = createMuiTheme({
   palette: {
@@ -45,9 +46,12 @@ function App() {
           <Route path='/user'>
             <Profile />
           </Route>
-          <Route path='/'>
+          <Route exact={true} path='/'>
             <Home followings={followings} />
           </Route>
+        </Switch>
+        <Switch path='/upload'>
+          <FileUploader />
         </Switch>
         <NavigationBar />
         </>)

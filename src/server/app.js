@@ -13,7 +13,7 @@ const postRouter = require('./features/post/postRouter');
 const initDB = require('./db/init');
 const User = require('./db/schemas/user');
 const Post = require('./db/schemas/post');
-const checkAuthentication = require('./middlewares/auth');
+const checkAuthentication = require('./middlewares/isAuthenticated');
 
 const app = express();
 const PORT = process.env.port || 3000;
@@ -40,9 +40,9 @@ app.use(passport.session());
 
 // Routing ---------------------
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
 app.use(checkAuthentication);
 app.use('/', indexRouter);
-app.use('/post', postRouter);
 app.use('/user', userRouter);
 app.get('/success', (req, res) => res.send(req));
 app.get('/error', (req, res) => res.send('error logging in'));

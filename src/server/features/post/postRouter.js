@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const formidable = require('formidable');
+
 const chalk = require('chalk');
 const {
   createPost,
@@ -7,8 +9,19 @@ const {
 } = require('./postsController');
 
 router.get('/', (req, res) => {
-  console.log(chalk.red(req.isAuthenticated()));
   res.send('post');
+});
+
+router.post('/upload', (req, res, next) => {
+  const form = formidable({ multiples: false });
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.json({ fields, files });
+    console.log(files);
+  });
 });
 
 router.get('/:id/like', async (req, res) => {

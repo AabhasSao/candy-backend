@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3000';
 const user = 'user';
-// const post = 'post';
+const post = 'post';
 // const auth = 'auth';
 
 const userRoutes = {
@@ -9,6 +9,11 @@ const userRoutes = {
   followers: `${baseUrl}/${user}/followers`,
 };
 
+const postRoutes = {
+  upload: `${baseUrl}/${post}/upload`,
+};
+
 module.exports = {
   userRoutes,
+  postRoutes,
 };

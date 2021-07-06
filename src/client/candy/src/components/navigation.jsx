@@ -1,9 +1,9 @@
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Home, Favorite, LocationOn, AccountCircle,
-} from '@material-ui/icons';
+import Home from '@material-ui/icons/Home';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 export default function NavigationBar() {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('Home');
   const classes = useStyles();
 
   return (
@@ -31,11 +31,16 @@ export default function NavigationBar() {
           component={Link}
           to='/'
           label="Home"
-          value="home"
+          value="Home"
           icon={<Home />}
         />
-        <BottomNavigationAction label="Favorites" value="favorites" icon={<Favorite />} />
-        <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOn />} />
+        <BottomNavigationAction
+          component={Link}
+          to='/upload'
+          label="Upload"
+          value="Upload"
+          icon={<AddCircleOutlineIcon />}
+        />
         <BottomNavigationAction
           component={Link} to='/user'
           label="Profile"
