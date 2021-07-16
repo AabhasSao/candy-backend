@@ -10,19 +10,19 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/auth/login', {
-      email,
-      password,
-    }, {
-      withCredentials: true,
-    }).then((res) => {
+    try {
+      const res = await axios.post(
+        'http://localhost:3000/auth/login',
+        { email, password }, { withCredentials: true },
+      );
       console.log(res);
-      setIsAuthenticated(true);
-    }).catch((err) => {
+      if (res.status === 200) setIsAuthenticated(true);
+    } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
-    });
+    }
   };
 
   return (

@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
 const signUpUser = require('./signUp');
-// const chalk = require('chalk');
 
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
@@ -19,7 +18,6 @@ router.post('/login', (req, res, next) => {
     if (!user) {
       return res.status(401).send('username or password incorrect');
     }
-    // console.log(user);
     // NEED TO CALL req.login()!!!
     req.login(user, (e) => {
       if (e) {
@@ -27,6 +25,7 @@ router.post('/login', (req, res, next) => {
       }
       return res.send('login successful');
     });
+    return null;
   })(req, res, next);
 });
 

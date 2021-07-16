@@ -1,7 +1,4 @@
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-// const chalk = require('chalk');
-// const { createUser } = require('./features/user/usersController');
 const User = require('./db/schemas/user');
 
 module.exports = (passport) => {
