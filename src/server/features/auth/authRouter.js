@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
-const path = require('path');
-const chalk = require('chalk');
+const signUpUser = require('./signUp');
+// const chalk = require('chalk');
 
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
@@ -9,17 +9,10 @@ router.get('/', (req, res) => {
   } else res.send(401);
 });
 
-router.get('/login', (req, res) => {
-  res.sendFile(path.resolve(`${__dirname}/../../public/login.html`));
-});
-
-router.get('/user', (req, res) => {
-  console.log(chalk.green(req.user));
-  return res.send(req.user);
-});
+router.get('/user', (req, res) => res.send(req.user));
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user) => {
     if (err) {
       return next(err);
     }
@@ -37,29 +30,10 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
+router.post('/signup', async (req, res) => {
+  const { username, email, password } = req.body;
+  const user = await signUpUser(email, username, password);
+  res.send(user);
 });
-
-router.get('/signup', (req, res) => {
-  res.sendFile(path.resolve(`${__dirname}/../../public/register.html`));
-});
-
-router.post('/signup', passport.authenticate('local-signup', {
-  successRedirect: '/',
-  failureRedirect: '/auth/signup',
-  failureFlash: true,
-}));
-
-// router.get('/google',
-//   passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// router.get('/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/error' }),
-//   (req, res) => {
-//     // Successful authentication, redirect success.
-//     res.redirect('/success');
-//   });
 
 module.exports = router;

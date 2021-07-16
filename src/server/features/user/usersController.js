@@ -1,6 +1,6 @@
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
-const chalk = require('chalk');
+// const chalk = require('chalk');
 const User = require('../../db/schemas/user');
 const Post = require('../../db/schemas/post');
 const { sequelize } = require('../../db/connect');
