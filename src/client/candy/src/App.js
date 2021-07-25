@@ -7,8 +7,9 @@ import { orange, deepOrange } from '@material-ui/core/colors';
 import Profile from './pages/profile.jsx';
 import Home from './pages/home.jsx';
 import NavigationBar from './components/navigation.jsx';
-import Authentication from './components/authentication.component';
+import Authentication from './components/authentication.jsx';
 import FileUploader from './utils/fileUploader.jsx';
+import { userRoutes, authRoutes } from './routes/routes';
 
 let theme = createMuiTheme({
   palette: {
@@ -24,12 +25,12 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(async () => {
-    const auth = await axios.get('http://localhost:3000/auth/', { withCredentials: true });
+    const auth = await axios.get(authRoutes.root, { withCredentials: true });
     if (auth.status === 200) {
       setIsAuthenticated(true);
     }
     if (isAuthenticated) {
-      const res = await axios.get('http://localhost:3000/user/followings', { withCredentials: true });
+      const res = await axios.get(userRoutes.followings, { withCredentials: true });
       const obj = {};
       res.data.forEach((item) => {
         obj[item.username] = true;

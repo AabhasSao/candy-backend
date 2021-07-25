@@ -16,8 +16,6 @@ const SignUp = ({ setShowlogin }) => {
       email,
       username,
       password,
-    }).then((res) => {
-      console.log(res);
     });
   };
   return (
