@@ -1,0 +1,19 @@
+.responsive-box {
+    position: relative;
+    background-color: #eee;
+    overflow: hidden;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.responsive-box::after {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import '../assets/css/responsiveBox.css';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '600px',
+    width: '100%',
     margin: 'auto auto 1.4em auto',
     backgroundColor: theme.primary,
   },
@@ -72,10 +72,11 @@ const Post = (
             title={username}
             subheader='planet Earth'
           />
-          <CardMedia
-            component='img'
-            src={url}
-          />
+          <div className="responsive-box">
+            <div className="content">
+              <img src={url} alt={description} />
+            </div>
+          </div>
           <CardActions>
             <IconButton
               color='primary'
