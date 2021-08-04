@@ -10,7 +10,7 @@ const userRoutes = {
 };
 
 const postRoutes = {
-  upload: `${baseUrl}/${post}/upload`,
+  create: `${baseUrl}/${post}/create`,
 };
 
 const authRoutes = {

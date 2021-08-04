@@ -17,7 +17,7 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
         'http://localhost:3000/auth/login',
         { email, password }, { withCredentials: true },
       );
-      // console.log(res);
+      console.log(res);
       if (res.status === 200) setIsAuthenticated(true);
     } catch (err) {
       // eslint-disable-next-line no-console

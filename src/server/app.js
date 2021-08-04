@@ -4,6 +4,7 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const morgan = require('morgan');
+const fs = require('fs');
 const { sequelize } = require('./db/connect');
 // const { auth } = require('./db/connect');
 const authRouter = require('./features/auth/authRouter');
@@ -13,8 +14,8 @@ const postRouter = require('./features/post/postRouter');
 const initDB = require('./db/init');
 const User = require('./db/schemas/user');
 const Post = require('./db/schemas/post');
+const { uploadImage } = require('./aws/s3');
 // const checkAuthentication = require('./middlewares/isAuthenticated');
-
 const app = express();
 const PORT = process.env.port || 3000;
 
@@ -49,6 +50,7 @@ app.get('/error', (req, res) => res.send('error logging in'));
 
 // db
 initDB(sequelize, User, Post);
+uploadImage();
 
 app.listen(PORT, () => {
   // console.log(`listening on port ${PORT}`);

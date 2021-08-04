@@ -12,8 +12,8 @@ const FileUploader = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', image);
-    console.log(formData);
-    axios.post(postRoutes.upload, formData, {
+    axios.post(postRoutes.create, formData, {
+      withCredentials: true,
       onUploadProgress: (progressEvent) => {
         console.log(progressEvent.loaded / progressEvent.total);
       },

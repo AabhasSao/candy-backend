@@ -1,37 +1,37 @@
+/* eslint-disable no-console */
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
-
 const fs = require('fs');
-const { nanoid } = require('nanoid');
 
-let config = fs.readFileSync('./config.json');
+let config = fs.readFileSync('../config.json');
 config = JSON.parse(config);
 const {
-  REGION, BUCKET_NAME, AWSSecretKey, accessKeyId,
+  REGION, BUCKET_NAME, AWS_SECRET_KEY, AWS_ACCESS_KEY_ID,
 } = config;
 
 const s3 = new S3Client({
   region: REGION,
   credentials: {
-    accessKeyId,
-    secretAccessKey: AWSSecretKey,
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_KEY,
   },
 });
 
-const f = fs.readFileSync('../static/selena_gomez_vogue_2016.jpg');
-console.log(f);
-
-const uploadParams = {
-  Bucket: BUCKET_NAME,
-  Key: `${nanoid()}.jpg`,
-  Body: fs.readFileSync('../static/selena_gomez_vogue_2016.jpg'),
-};
-
-const uploadImage = async () => {
+const uploadImage = async (filepath, filename) => {
   try {
+    const file = fs.readFileSync(filepath);
+
+    const uploadParams = {
+      Bucket: BUCKET_NAME,
+      Key: filename,
+      Body: file,
+      ACL: 'public-read',
+    };
+
     await s3.send(new PutObjectCommand(uploadParams));
     console.log(`successfully uploaded object: ${uploadParams.Bucket}/${uploadParams.Key}`);
   } catch (e) {
     console.error(e);
   }
 };
-uploadImage();
+
+module.exports = { uploadImage };

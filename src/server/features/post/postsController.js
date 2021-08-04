@@ -1,20 +1,7 @@
-const chalk = require('chalk');
+const { nanoid } = require('nanoid');
 const Post = require('../../db/schemas/post');
-
-async function createPost(req, res) {
-  const { userId } = req.body;
-  try {
-    const result = await Post.create({
-      userId,
-      imageURL: 'https://images.pexels.com/photos/4124367/pexels-photo-4124367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    });
-    console.log(userId);
-    console.log(result);
-    res.send('image uploaded successfully');
-  } catch (e) {
-    console.error(e);
-  }
-}
+const { createPost } = require('./utils/createPost');
+const { uploadImage } = require('../../aws/s3');
 
 const like = async (id) => {
   try {
@@ -36,8 +23,23 @@ const dislike = async (id) => {
   }
 };
 
+const uploadPost = async (filepath, user) => {
+  try {
+    const postId = nanoid();
+    const filename = `${postId}.jpg`;
+    const imageUrl = `https://candy-aabhas.s3.ap-south-1.amazonaws.com/${filename}`;
+
+    // upload file to s3 then store url in db
+    await uploadImage(filepath, filename);
+    await createPost(user.id, imageUrl, postId, Post);
+  } catch (e) {
+    return e;
+  }
+  return 'successfully uploaded post image';
+};
+
 module.exports = {
-  createPost,
   like,
   dislike,
+  uploadPost,
 };
