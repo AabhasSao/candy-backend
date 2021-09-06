@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Feed from '../components/feed.jsx';
-import SuggestToFollow from '../components/suggestToFollow.jsx';
+// import SuggestToFollow from '../components/suggestToFollow.jsx';
 
-const Home = ({ followings }) => (
+// const Home = ({ followings }) => (
+const Home = () => (
         <>
-            <SuggestToFollow followings={followings} />
+            {/* <SuggestToFollow followings={followings} /> */}
             <Feed />
         </>
 );

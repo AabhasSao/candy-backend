@@ -8,7 +8,7 @@ module.exports = (passport) => {
   (email, password, done) => {
     User.findOne({ where: { email } }).then((user) => {
       if (!user) {
-        return done(null, false);
+        return done(null, false, { message: 'user not found' });
       }
       if (!user.validPassword(user, password)) {
         return done(null, false, { message: 'Invalid Password' });

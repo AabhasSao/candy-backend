@@ -11,12 +11,12 @@ router.get('/', (req, res) => {
 router.get('/user', (req, res) => res.send(req.user));
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
-      return res.status(401).send('username or password incorrect');
+      return res.json({ error: info.message });
     }
     // NEED TO CALL req.login()!!!
     req.login(user, (e) => {

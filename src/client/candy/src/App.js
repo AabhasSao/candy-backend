@@ -44,15 +44,15 @@ function App() {
       (isAuthenticated)
         ? (<>
         <Switch>
+          <Route path='/'>
+            <Home followings={followings} />
+          </Route>
           <Route path='/user'>
             <Profile />
           </Route>
-          <Route exact={true} path='/'>
-            <Home followings={followings} />
+          <Route exact={true} path='/upload'>
+            <FileUploader />
           </Route>
-        </Switch>
-        <Switch path='/upload'>
-          <FileUploader />
         </Switch>
         <NavigationBar />
         </>)
