@@ -8,12 +8,25 @@ import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles';
+import { authRoutes } from '../routes/routes';
+
+const useStyles = makeStyles({
+  alert_box: {
+    backgroundColor: 'red',
+    color: 'white',
+    fontWeight: '600',
+    fontSize: '1.1em',
+  },
+});
 
 const Login = ({ setIsAuthenticated, setShowlogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState('some error occured');
+
+  const classes = useStyles();
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -27,7 +40,7 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:3000/auth/login',
+        authRoutes.login,
         { email, password }, { withCredentials: true },
       );
       if (res.status === 200) setIsAuthenticated(true);
@@ -35,7 +48,6 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
       // eslint-disable-next-line no-console
       setMessage(err.response.data.error);
       setOpen(true);
-      console.log(message);
     }
   };
 
@@ -67,6 +79,11 @@ const Login = ({ setIsAuthenticated, setShowlogin }) => {
       </form>
       <Snackbar
         open={open}
+        ContentProps={{
+          classes: {
+            root: classes.alert_box,
+          },
+        }}
         autoHideDuration={6000}
         onClose={handleClose}
         message={message}
