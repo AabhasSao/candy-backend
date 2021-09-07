@@ -1,8 +1,5 @@
-.App {
-  text-align: center;
-  background-color: blue;
-  min-height: 100vh;
-  width: auto;
+body {
+  height: 100vh;
 }
 
 input {
